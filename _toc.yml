@@ -1,9 +1,21 @@
 # Table of contents
 # Learn more at https://jupyterbook.org/customize/toc.html
 
-format: jb-book
+# format: jb-book
+# root: intro
+# chapters:
+# - file: markdown
+# - file: notebooks
+# - file: markdown-notebooks
+
+format: jb-article
 root: intro
-chapters:
+title: README
+sections:
 - file: markdown
-- file: notebooks
-- file: markdown-notebooks
+  title: Bevezeto
+  sections:
+  - file: notebooks
+    title: "Notebook"
+  - file: markdown-notebooks
+    title: "MD-NB"
