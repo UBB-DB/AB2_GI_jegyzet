@@ -15,7 +15,12 @@ sections:
 - file: markdown
   title: Bevezeto
   sections:
-  - file: notebooks
-    title: "Notebook"
+  - file: Szeminarium_1/gyakorlat
+    title: "Szeminárium 1"
+    # title: "Notebook"
   - file: markdown-notebooks
-    title: "MD-NB"
+    title: "Szeminárium"
+  - file: Szeminarium_2/SetOperator_DML.ipynb
+    title: "Szeminárium 2 - Halmazműveletek, DML, Alkérdések"
+  - file: Szeminarium_3/group_by_havin.ipynb
+    title: "Szeminárium 3 - GROUP BY, HAVING, ORDER BY"
