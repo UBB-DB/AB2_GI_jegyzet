@@ -20,7 +20,7 @@ sections:
     # title: "Notebook"
   # - file: markdown-notebooks
   #   title: "Szeminárium"
-  - file: Szeminarium_2/SetOperator_DML
+  - file:  Szeminarium_2/SetOperators_DML
     title: "Szeminárium 2 - Halmazműveletek, DML, Alkérdések" 
 
   - file: Szeminarium_3/group_by_having
