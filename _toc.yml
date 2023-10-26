@@ -13,10 +13,10 @@ root: intro
 title: README
 sections:
 - file: markdown
-  title: Bevezeto
+  title: Bevezető
   # sections:
 - file: Szeminarium_1/gyakorlat
-   title: "Szeminárium 1"
+  title: "Szeminárium 1 - Ismétlés"
     # title: "Notebook"
   # - file: markdown-notebooks
   #   title: "Szeminárium"
