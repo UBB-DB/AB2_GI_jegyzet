@@ -1,11 +1,15 @@
-# Welcome to your Jupyter Book
+#  HALADO ADATBAZIS ELEMEK jegyzet
+ 
+Jelenleg a jegyzet a következő témaköröket tartalmazza:
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
-
-Check out the content pages bundled with this sample book to see more.
-
+ 
 ```{tableofcontents}
+
 ```
+<!-- ## 1. [Adatbázisok tervezése](./adatbazisok-tervezese.md)
+## 2. [Tranzakciók](./tranzakciok.md)
+## 3. [Indexek](./indexek.md)
+## 4. [Triggerek](./triggerek.md)
+## 5. [Nézetek](./nezetek.md)
+## 6. [Tárolt eljárások](./tárolt-eljárások.md)
+## 7. [Függvények](./függvények.md)  -->

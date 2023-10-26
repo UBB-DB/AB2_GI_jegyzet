@@ -14,13 +14,15 @@ title: README
 sections:
 - file: markdown
   title: Bevezeto
-  sections:
-  - file: Szeminarium_1/gyakorlat
-    title: "Szeminárium 1"
+  # sections:
+- file: Szeminarium_1/gyakorlat
+   title: "Szeminárium 1"
     # title: "Notebook"
   # - file: markdown-notebooks
   #   title: "Szeminárium"
-  - file:  Szeminarium_2/SetOperators_DML
-    title: "Szeminárium 2 - Halmazműveletek, DML" 
-  - file: Szeminarium_3/subqueries
-    title: "Szeminárium 3 -  Alkérdések"
+- file:  Szeminarium_2/SetOperators_DML
+  title: "Szeminárium 2 - Halmazműveletek, DML" 
+- file: Szeminarium_3/subqueries
+  title: "Szeminárium 3 -  Alkérdések"
+- file: Utmutato/01_telepitesi_utmutato
+  title: "Telepitesi utmutató"
