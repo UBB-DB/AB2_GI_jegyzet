@@ -12,8 +12,8 @@ format: jb-article
 root: intro
 title: README
 sections:
-- file: markdown
-  title: Bevezető
+# - file: markdown
+  # title: Bevezető
   # sections:
 - file: Szeminarium_1/gyakorlat
   title: "Szeminárium 1 - Ismétlés"
