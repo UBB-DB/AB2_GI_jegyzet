@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Halmazműveletek &#8212; My sample book</title>
+    <title>Telepítési útmutató &#8212; My sample book</title>
   
   
   
@@ -61,11 +61,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_2/SetOperators_DML';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Utmutato/01_telepitesi_utmutato';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Alkérdések" href="../Szeminarium_3/subqueries.html" />
-    <link rel="prev" title="Szeminárium 1" href="../Szeminarium_1/gyakorlat.html" />
+    <link rel="prev" title="Alkérdések" href="../Szeminarium_3/subqueries.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,11 +158,11 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../markdown.html">Bevezető</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_1/gyakorlat.html">Szeminárium 1 - Ismétlés</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Halmazműveletek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_2/SetOperators_DML.html">Halmazműveletek</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_3/subqueries.html">Alkérdések</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../Utmutato/01_telepitesi_utmutato.html">Telepitesi utmutató</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Telepitesi utmutató</a></li>
 </ul>
 
     </div>
@@ -235,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FSzeminarium_2/SetOperators_DML.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FUtmutato/01_telepitesi_utmutato.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -265,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Szeminarium_2/SetOperators_DML.ipynb" target="_blank"
+      <li><a href="../_sources/Utmutato/01_telepitesi_utmutato.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -275,7 +274,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -347,7 +346,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Halmazműveletek</h1>
+    <h1>Telepítési útmutató</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -357,10 +356,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Halmazműveletek</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-utasitasok">DML utasitások</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese">Szerver telepitése</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese-windows-alatt">Szerver telepitése Windows alatt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese-linux-alatt">Szerver telepitése Linux alatt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-hasznalata-docker-el-macos-kornyezetben">Szerver használata Docker-el MacOS környezetben</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#egyeb-informacio-docker-kornyezet-hasznalatara">Egyéb információ Docker környezet használatára</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kliens-telepitese">Kliens telepitése</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowsra">Windowsra:</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -371,46 +378,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="halmazmuveletek">
-<h1>Halmazműveletek<a class="headerlink" href="#halmazmuveletek" title="Permalink to this heading">#</a></h1>
-<p>Halmaznak nevezünk egydek sokaságát. Esetünkben azonos tipusú egyedekről(sorokról) beszélünk.</p>
-<p>3 halmazműveletet használhatunk SQL-ben:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="telepitesi-utmutato">
+<h1>Telepítési útmutató<a class="headerlink" href="#telepitesi-utmutato" title="Permalink to this heading">#</a></h1>
+<p>A leírás csak</p>
+<p>Mivel adatbáziskezelő rendszerekről lesz szó ezért az első szükséges telepíteni való a Microsoft SQL Server adatbáziskezelő rendszer szerver komponense lesz.</p>
+<p>A második fontos elem egy grafikus felhasználói felülettel(GUI-val) rendelkező kliens telepítése lesz.</p>
+<p><strong>A telepiteshez 2-3 GB adat letöltése szükséges, ezért ez egy picit hosszas lehet.</strong></p>
+<section id="szerver-telepitese">
+<h2>Szerver telepitése<a class="headerlink" href="#szerver-telepitese" title="Permalink to this heading">#</a></h2>
+<p>Nativ telepitésre következő operációs rendszerek támogatottak:</p>
 <ul class="simple">
-<li><p>Egyesités: megadja a halmazok összegét UNION/UNION ALL. UNION ALL esetén a <strong>duplikátumok bennmaradnak:  (A U B) U C<br />
- **A U (B U C)<br />
-**</strong><img alt="" src="https://matekarcok.hu/wp-content/uploads/2018/02/Halmaz_AunioB-300x240.jpg" /></p></li>
-<li><p>Metszet: megadja a halamzok közös részét INTERSECT <img alt="" src="https://matekarcok.hu/wp-content/uploads/2018/02/Halmaz_AmetszetB-300x240.jpg" /></p></li>
-<li><p>Kivonás: megadja a halmazok különbségét  EXCEPT<img alt="" src="https://matekarcok.hu/wp-content/uploads/2018/02/Halmaz_AminuszB-300x240.jpg" /></p></li>
+<li><p>Windows</p></li>
+<li><p>Linux (RHEL, Ubuntu, Suse )</p></li>
 </ul>
-<p>Kérdés:</p>
-<p>- Milyen matematikai tulajdonságokkal rendelkeznek ezek a műveletek(pl kommutativitás)?</p>
-<p><strong>Oldjuk meg hamazmuveltekkel:</strong></p>
-<p>Adjuk meg azokat a termékeket melyek:</p>
-<p>- Alkategóriája(SubCategory) Mountain Bike és olcsóbbak mint 1000</p>
-<p>- Alkategóriája Road Bike vagy drágább mint 2000</p>
-<p>- Alkategóriája Touring Bike de nem drágább mint 2000</p>
-<p>- Olcsóbbak mint 2000 de nem Touring Bike alkategoriájuak</p>
+<p>Alternativ megoldás (pl. MacOS kornyezetben) Docker konténerek használata lehetséges, ez működik windows valamint linux környezet esetén is.</p>
+<section id="szerver-telepitese-windows-alatt">
+<h3>Szerver telepitése Windows alatt<a class="headerlink" href="#szerver-telepitese-windows-alatt" title="Permalink to this heading">#</a></h3>
+<p>Windowsra a letöltést az alábbi linken találjátok, ajánlott a Developer kiadás letöltése és telepitése: <a class="reference external" href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">https://www.microsoft.com/en-us/sql-server/sql-server-downloads</a></p>
 </section>
-<section id="dml-utasitasok">
-<h1>DML utasitások<a class="headerlink" href="#dml-utasitasok" title="Permalink to this heading">#</a></h1>
-<p>- Insert: adatok beszurására</p>
-<p>- Update: módositására</p>
-<p>- Delete: törlésre</p>
-<p>Feladat:</p>
-<p>- Vonjunk le minden termék árából 10%-ot ahol az Ár nagyobb mint 2000</p>
-<p><strong>CASE feltételes kifejezés</strong></p>
-<p>Segitségével több feltétel kiértékelésével térithetünk vissza 1 megfelelő értéket.</p>
-<p>Használható SELECT-ekkel és DML utasitásokkal együtt is</p>
-<p>Szintaxis:</p>
-<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CASE</span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">input_expression</span></p>
-<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">WHEN</span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">when_expression</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">THEN</span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">result_expression</span></p>
-<p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ …n ]</span></p>
-<p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">ELSE</span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">else_result</span><span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">_expression</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">]</span></p>
-<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span></p>
-<p>Feladatok:</p>
-<p>- Dekodoljuk a termékek kategóriáját: ‘R’ - Road, ‘M’-Mountain, ‘T’ - Touring különben Egyéb</p>
-<p>- Adjuk meg a termékeket 3 kategóriára osztva ár szerint:  Olcsó, Közepes, Drága</p>
-<p>- Modositsuk a termékek árát: Adjunk hozzá 10%-ot ha olcsóbb mint 1000 maradjon meg az aktuális ha olcsobb mint 2000 különben vonjunk le 10%-ot</p>
+<section id="szerver-telepitese-linux-alatt">
+<h3>Szerver telepitése Linux alatt<a class="headerlink" href="#szerver-telepitese-linux-alatt" title="Permalink to this heading">#</a></h3>
+<p>Linuxra szintén találtok ezen a linken 3 különböző distro-ra vonatkozó telepitési leirást.
+<a class="reference external" href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">https://www.microsoft.com/en-us/sql-server/sql-server-downloads</a></p>
+</section>
+<section id="szerver-hasznalata-docker-el-macos-kornyezetben">
+<h3>Szerver használata Docker-el MacOS környezetben<a class="headerlink" href="#szerver-hasznalata-docker-el-macos-kornyezetben" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MacOSre nativan nem telepíthető a SQL Server, viszont futtatható egy izolált konténer környezetben. Ehhez szükséges a Docker desktop telepitése aminek itt érhető el az utmutatója(figyeljetek arra, hogy ha “Apple silicon” processzorotok van ahhoz van külön leirás): <a class="reference external" href="https://docs.docker.com/desktop/">https://docs.docker.com/desktop/</a> Ha sikeresen telepitettétek szükséges egy ugynevezett konténer “image” letöltése és futtatása, erre vonatkozóan itt találtok információkat: <a class="reference external" href="https://hub.docker.com/_/microsoft-mssql-server">https://hub.docker.com/_/microsoft-mssql-server</a></p></li>
+</ul>
+<p>Mivel az Apple silicon ARM architekturán alapul, ez némi limitációval járhat ezért csak a SQL Server Edge image-et tudjátok futtatni: <a class="reference external" href="https://hub.docker.com/_/microsoft-azure-sql-edge">https://hub.docker.com/_/microsoft-azure-sql-edge</a></p>
+</section>
+<section id="egyeb-informacio-docker-kornyezet-hasznalatara">
+<h3>Egyéb információ Docker környezet használatára<a class="headerlink" href="#egyeb-informacio-docker-kornyezet-hasznalatara" title="Permalink to this heading">#</a></h3>
+<p>A Dockeres megoldás  működik Windows es Linux alatt is, az előnye/hátránya annyi hogy mindig újra kell indítani a servert, míg a nativ telepités automatikusan fut mint “service”. Fontos A konténer környezet izolált, a konténer leallasa utan az adatok nem lesznek elmenteve. Ahhoz hogy az adatok megmeradjanak futtatasok kozott az adatbasikezelo egy perzisztens tárra kell írja. Ezt egy “volume” segisegevel erhetitek el. Az alabbi linken talaltok reszletesebb leirast, a lenyeg hogy a docker run parancs esetén szukséges egy extra “-v lokalis/konyvtar:kontener/konyvtar” opcio hasznalata.</p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver16&amp;amp;pivots=cs1-bash#mount-a-host-directory-as-data-volume">https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver16&amp;pivots=cs1-bash#mount-a-host-directory-as-data-volume</a></p>
+</section>
+</section>
+<section id="kliens-telepitese">
+<h2>Kliens telepitése<a class="headerlink" href="#kliens-telepitese" title="Permalink to this heading">#</a></h2>
+<section id="windowsra">
+<h3>Windowsra:<a class="headerlink" href="#windowsra" title="Permalink to this heading">#</a></h3>
+<p>a szerver telepités befejeztével felajánlja az SSMS(SQL server management studio) telepitését amire szükség lesz. Ha véletlen kimarad a telepitőt itt találjátok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16">https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16</a> A telepítő fel fog telepíteni egy Azure Data Studio névű eszközt is(ez VS Code alapú fejlesztői környezet), opcionálisan ez is használható mint kliens.</p>
+<p>Linux es Mac: alatt csak az Azure Data Studio kliens telepíthető mivel ez platform független. Ezt itt találjatok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16">https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16</a></p>
+<p>Sikeres tanévet!</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -426,7 +438,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./Szeminarium_2"
+            path: "./Utmutato"
         },
         predefinedOutput: true
     }
@@ -445,22 +457,13 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Szeminarium_1/gyakorlat.html"
+       href="../Szeminarium_3/subqueries.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Szeminárium 1</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../Szeminarium_3/subqueries.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Alkérdések</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -480,10 +483,18 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Halmazműveletek</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-utasitasok">DML utasitások</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese">Szerver telepitése</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese-windows-alatt">Szerver telepitése Windows alatt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-telepitese-linux-alatt">Szerver telepitése Linux alatt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#szerver-hasznalata-docker-el-macos-kornyezetben">Szerver használata Docker-el MacOS környezetben</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#egyeb-informacio-docker-kornyezet-hasznalatara">Egyéb információ Docker környezet használatára</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kliens-telepitese">Kliens telepitése</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowsra">Windowsra:</a></li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>
