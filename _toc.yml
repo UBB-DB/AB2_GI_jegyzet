@@ -24,5 +24,9 @@ sections:
   title: "Szeminárium 2 - Halmazműveletek, DML" 
 - file: Szeminarium_3/subqueries
   title: "Szeminárium 3 -  Alkérdések"
+- file: Szeminarium_4/nezetek_taroltEljarasok
+  title: "Szeminárium 4 - Delete, Nezetek, Tarolt eljárások(bevezető)"
+- file: Szeminarium_5/taroltEljarasokHibakezeles_fuggvenyek
+  title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
 - file: Utmutato/01_telepitesi_utmutato
   title: "Telepitesi utmutató"
