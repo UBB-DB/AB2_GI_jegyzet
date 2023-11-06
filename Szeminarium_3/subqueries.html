@@ -409,10 +409,38 @@ A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak 
 <section id="feladatok">
 <h1>Feladatok<a class="headerlink" href="#feladatok" title="Permalink to this heading">#</a></h1>
 <ol class="arabic simple">
-<li><p>Keressük meg a legjobban eladott terméke(ke)t a 2019-es AdventureWorksLT adatbázisban. Használjunk alkerdest azzal a céllal, hogy meghatározzuk a legtöbb eladott egységgel rendelkező terméket.</p></li>
+<li><p>Keressük meg a legjobban eladott terméke(ke)t a 2019-es AdventureWorksLT adatbázisban. Használjunk alkerdest azzal a céllal, hogy meghatározzuk a legtöbb eladott egységgel rendelkező terméket</p></li>
+</ol>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sod</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">p</span><span class="w"> </span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sod</span><span class="w"> </span>
+<span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sod</span><span class="p">.</span><span class="n">ProductID</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sod</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">TotalQuantity</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FROM</span>
+<span class="w">        </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sodD</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sodD</span>
+<span class="w">        </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sodD</span><span class="p">.</span><span class="n">ProductID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span><span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">TotalQuantity</span><span class="w"> </span><span class="k">DESC</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
 <li><p>Keressük meg azokat a termékeket, amelyeknek az árbevétele meghaladja a termékek átlagos árbevételét. Használjunk egy alkerdest az átlagos árbevétel kiszámításához, majd szűrjük a termékeket az alapján, hogy az árbevételük meghaladja ezt az átlagos értéket.</p></li>
 <li><p>Keressük meg azokat a termékeket, amelyekhez nincs rendelés az adatbázisban. Használjunk egy alpontot, hogy először meghatározzuk azokat a termékeket, amelyekhez rendelés tartozik, majd kérjük le az olyan termékeket, amelyek nem szerepelnek ebben az alpontban.</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">TotalQuantity</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span>
+<span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sodD</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sodD</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sodD</span><span class="p">.</span><span class="n">ProductID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.007</div><div class="output text_html"><table><tr><th>(No column name)</th></tr><tr><td>87</td></tr></table></div></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -424,16 +452,16 @@ A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak 
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "SQL"
         },
         kernelOptions: {
-            name: "python3",
+            name: "SQL",
             path: "./Szeminarium_3"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'SQL'</script>
 
                 </article>
               

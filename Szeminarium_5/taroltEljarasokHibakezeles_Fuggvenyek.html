@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Vátozók &amp; Vezérlő struktúrák &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    HALADO ADATBAZIS ELEMEK jegyzet
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_1/gyakorlat.html">Szeminárium 1 - Ismétlés</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_2/SetOperators_DML.html">Halmazműveletek</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_3/subqueries.html">Alkérdések</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Utmutato/01_telepitesi_utmutato.html">Telepitesi utmutató</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FSzeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vátozók & Vezérlő struktúrák</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Vátozók &amp; Vezérlő struktúrák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vezerlo-strukturak">Vezérlő struktúrák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarolt-eljarasok">Tárolt eljárások</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feladatok"><strong>Feladatok:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hibakezeles-tarolt-eljarasokban">Hibakezelés tárolt eljárásokban</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raiserror-parancs">RAISERROR parancs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throw">THROW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-14px-color-rgb-23-23-23-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-span-span-class-hljs-keyword-style-font-size-14px-box-sizing-inherit-outline-color-inherit-color-rgb-1-1-253-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-error-span-rendszervaltozo"><span style='font-size: 14px; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);'>@@</span><span class="hljs-keyword" style='font-size: 14px; box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);'>ERROR</span> - rendszerváltozó</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nezetek">Nézetek</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#temporalis-tablak">Temporális táblák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-14px-letrehozas-es-adatok-hozaadasa-span"><span style="font-size: 14px;">Létrehozás és adatok hozáadása</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fuggvenyek">Függvények</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="vatozok-vezerlo-strukturak">
+<h1>Vátozók &amp; Vezérlő struktúrák<a class="headerlink" href="#vatozok-vezerlo-strukturak" title="Permalink to this heading">#</a></h1>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">DECLARE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;var1 </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">AS</span> <span class="hljs-built_in" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">INT</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">= </span> <span class="hljs-number" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">99</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">;</span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">DECLARE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;var2 </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">AS</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">NVARCHAR</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">(</span><span class="hljs-number" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">255</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">);</span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">SET</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;var2 = N</span><span class="hljs-string" style="font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">’string’</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">;</span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">SET</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;var2 = (SELECT …)</span></p>
+<p><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><br></span></p>
+</section>
+<section id="vezerlo-strukturak">
+<h1>Vezérlő struktúrák<a class="headerlink" href="#vezerlo-strukturak" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/begin-end-transact-sql?view=sql-server-ver16">BEGIN…END</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/return-transact-sql?view=sql-server-ver16">RETURN</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/if-else-transact-sql?view=sql-server-ver16"><strong>IF…ELSE</strong></a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/while-transact-sql?view=sql-server-ver16"><strong>WHILE</strong></a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/break-transact-sql?view=sql-server-ver16">BREAK</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/throw-transact-sql?view=sql-server-ver16">THROW</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/continue-transact-sql?view=sql-server-ver16">CONTINUE</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/try-catch-transact-sql?view=sql-server-ver16">TRY…CATCH</a></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/goto-transact-sql?view=sql-server-ver16">GOTO</a> <em>label</em></p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/waitfor-transact-sql?view=sql-server-ver16">WAITFOR</a></p>
+<p><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><br></span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tarolt-eljarasok">
+<h1>Tárolt eljárások<a class="headerlink" href="#tarolt-eljarasok" title="Permalink to this heading">#</a></h1>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">PROCEDURE </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&lt;schema_name&gt;.&lt;procedure_name&gt;</span> <span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">&#64;&lt;parameter_name&gt; = ‘VALUE’ &lt;OUTPUT&gt; </span> <span style="background-color:rgb(242, 242, 242);color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">AS …</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><span class="hljs-keyword" style="color:rgb(1, 1, 253);">ALTER PROCEDURE </span><span style="color:rgb(23, 23, 23);">&lt;schema_name&gt;.&lt;procedure_name&gt;</span><span style="color:rgb(23, 23, 23);"> </span><span class="hljs-keyword" style="color:rgb(1, 1, 253);">AS …</span><br></span><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><span class="hljs-keyword" style="color:rgb(1, 1, 253);"><span style="color:rgb(23, 23, 23);">EXEC &lt;schema_name&gt;.&lt;procedure_name&gt; &#64;&lt;parameter_name&gt; = ‘VALUE’</span><br></span></span></p>
+<ul class="simple">
+<li><p><mark><strong>Visszatérési értékkel<span style="background-color:rgb(255, 255, 254);"><br></span></strong></mark><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">PROCEDURE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">HumanResources.uspGetEmployeesTest2 </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;LastName </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">nvarchar</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">(</span><span class="hljs-number" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">50</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">), </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;FirstName </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">nvarchar</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">(</span><span class="hljs-number" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">50</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">)</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">AS</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">…</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">RETURN(kod</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">) </span> <span style="white-space:pre;background-color:rgb(242, 242, 242);">Hivás:</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">DECLARE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;</span><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">result</span> <span class="hljs-built_in" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">int, &#64;out_param int</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">;</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">EXECUTE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;</span><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">result</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">= my_proc &#64;out_param ;</span></p></li>
+<li><p><mark><strong>Ki- és bemeneti paraméterekkel valamint alapértelmezett értékekkel és visszatérési értékkel</strong></mark> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">PROCEDURE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">Sales.usp_GetSalesYTD &#64;SalesPerson </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">nvarchar</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">(</span><span class="hljs-number" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">50</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">)</span> <mark><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">= </span> <span class="hljs-literal" style="color:rgb(7, 112, 74);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">NULL</span></mark><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">,</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;SalesYTD money = </span> <span class="hljs-literal" style="color:rgb(7, 112, 74);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">NULL</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:yellow;">OUTPUT</span> Hivás:   <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">DECLARE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;SalesYTDForSalesPerson money, &#64;</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">ret_code int</span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><br></span><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">EXECUTE</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">&#64;</span><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">ret_code </span> <span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">= Sales.usp_GetSalesYTD </span> <span class="hljs-string" style="font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">’Blythe’</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">, &#64;SalesYTD = &#64;SalesYTDForSalesPerson </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">OUTPUT</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">;</span></p></li>
+</ul>
+<section id="feladatok">
+<h2><strong>Feladatok:</strong><a class="headerlink" href="#feladatok" title="Permalink to this heading">#</a></h2>
+<p><strong>- Irjunk tárolt eljárást mely 1-et térit vissza ha van egy termék volt rendelve különben 0-t, bemenetként pedig megkapja a termék nevét.</strong></p>
+<p><strong>- Bővitsük az előzőt azzal, hogy visszatériti kimeneti paraméterként az illeto termék rendelési mennyiségét.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">spRaktarMennyiseg</span><span class="w"> </span>
+<span class="w">    </span><span class="o">@</span><span class="n">termekNev</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="w">    </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">NOCOUNT</span><span class="w"> </span><span class="k">ON</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">--DECLARE @rendelesSzam int =</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">SalesOrderId</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ProductId</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="o">@</span><span class="n">termekNev</span><span class="p">))</span><span class="w"> </span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">RETURN</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">ELSE</span>
+<span class="w">        </span><span class="k">RETURN</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">termekNeve</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;%Bike%&#39;</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">returnCode</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">raktarMennyiseg</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">EXECUTE</span><span class="w"> </span><span class="o">@</span><span class="n">returnCode</span><span class="o">=</span><span class="w"> </span><span class="n">spRaktarMennyiseg</span><span class="w"> </span><span class="o">@</span><span class="n">termekNeve</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span><span class="o">=@</span><span class="n">raktarMennyiseg</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">returnCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">raktarMennyiseg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.016</div><div class="output text_html"><table><tr><th>(No column name)</th><th>(No column name)</th></tr><tr><td>1</td><td>15</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Create a new stored procedure called &#39;raktar&#39; in schema &#39;Production&#39;</span>
+<span class="c1">-- Drop the stored procedure if it already exists</span>
+<span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">ROUTINES</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SPECIFIC_SCHEMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;SalesLT&#39;</span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="k">SPECIFIC_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;raktar&#39;</span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">ROUTINE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;PROCEDURE&#39;</span>
+<span class="p">)</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">raktar</span>
+<span class="k">GO</span>
+<span class="c1">-- Create the stored procedure in the specified schema</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">raktar</span>
+<span class="w">    </span><span class="o">@</span><span class="n">param1</span><span class="w"> </span><span class="cm">/*parameter name*/</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="cm">/*datatype_for_param1*/</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="cm">/*default_value_for_param1*/</span>
+<span class="w">    </span><span class="o">@</span><span class="n">param2</span><span class="w"> </span><span class="cm">/*parameter name*/</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="cm">/*datatype_for_param1*/</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cm">/*default_value_for_param2*/</span>
+<span class="c1">-- add more stored procedure parameters here</span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="c1">-- body of the stored procedure</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">param1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">param2</span>
+<span class="k">END</span>
+<span class="k">GO</span>
+<span class="c1">-- example to execute the stored procedure we just created</span>
+<span class="k">EXECUTE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">raktar</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cm">/*value_for_param1*/</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="cm">/*value_for_param2*/</span>
+<span class="k">GO</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Commands completed successfully.</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.025</div><div class="output text_html"><table><tr><th>(No column name)</th><th>(No column name)</th></tr><tr><td>1</td><td>2</td></tr></table></div></div>
+</div>
+</section>
+<section id="hibakezeles-tarolt-eljarasokban">
+<h2>Hibakezelés tárolt eljárásokban<a class="headerlink" href="#hibakezeles-tarolt-eljarasokban" title="Permalink to this heading">#</a></h2>
+<p>Vannak rendszer szintű valamint személyreszabott felhasználó által definiált hibauüzenetek. A személyreszabott üzeneteket a <span style="background-color: rgb(242, 242, 242); color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre;">sp_addmessage</span> tárolt eljárással tudunk hozzáadni a rendszerhez.</p>
+<section id="raiserror-parancs">
+<h3>RAISERROR parancs<a class="headerlink" href="#raiserror-parancs" title="Permalink to this heading">#</a></h3>
+<p>Használható arra hogy hibát téritsünk vissza, amit aztán a hivó folyamat kezelhet, valamint megjelenik a rendszerszintű hibaüzenetek között.</p>
+<p>Szintaxis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RAISERROR</span> <span class="p">(</span> <span class="p">{</span> <span class="n">msg_id</span> <span class="o">|</span> <span class="n">msg_str</span> <span class="o">|</span> <span class="nd">@local_variable</span> <span class="p">}</span>  
+    <span class="p">{</span> <span class="p">,</span><span class="n">severity</span> <span class="p">,</span><span class="n">state</span> <span class="p">}</span>  
+    <span class="p">[</span> <span class="p">,</span><span class="n">argument</span> <span class="p">[</span> <span class="p">,</span><span class="o">...</span><span class="n">n</span> <span class="p">]</span> <span class="p">]</span> <span class="p">)</span>  
+</pre></div>
+</div>
+<p>severity - Sulyosság. 1-25ig terjedő érték. Ha 20-nál nagyobb akkor fatális(hiba visszetéritése után a kapcsolat megszakad).</p>
+<p>state - 0-255 közötti érték. Abban az esetben hasznos ha ugyanaz a hiba több helyen van téritve, igy segitségével pontosan azonositható a kódrészlet.</p>
+<p>Példa:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">RAISERROR</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Error raised&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">-- Message text.  </span>
+<span class="w">               </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">-- Severity.  </span>
+<span class="w">               </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- State.  </span>
+<span class="w">               </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html">Total execution time: 00:00:00.002</div></div>
+</div>
+</section>
+<section id="throw">
+<h3>THROW<a class="headerlink" href="#throw" title="Permalink to this heading">#</a></h3>
+<p>Egyszerűbb módja a hibák téritésének. A sulyossága minden esetben(16) ezért visszatéritése esetén a kapcsolat megmarad. <strong>A hiba száma minden esetben 50000 nél nagyobb kell legyen</strong>
+<span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">THROW</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ { </span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">error_number</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">| &#64;</span><span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">local_variable</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">}, { message | &#64;</span><span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">local_variable</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">}, { state | &#64;</span><span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">local_variable</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">} ]</span>
+TRY-CATCH
+Mindkét kifejezést használjhatjuk a Try-Catch blokk esetén
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">BEGIN</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TRY</span>
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">……..</span>
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TRY</span>
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">BEGIN</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CATCH </span></p>
+<blockquote>
+<div><p><span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">DECLARE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;ErrorMessage </span>  <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">NVARCHAR</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">(</span><span class="hljs-number" style="color: rgb(23, 23, 23); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">4000</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">); </span>   
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">DECLARE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;ErrorSeverity </span>  <span class="hljs-built_in" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INT</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">; </span>  
+ <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">DECLARE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;ErrorState </span>  <span class="hljs-built_in" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INT</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">; </span>  
+ <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">SELECT</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;ErrorMessage = ERROR_MESSAGE(), &#64;ErrorSeverity = ERROR_SEVERITY(), &#64;ErrorState = ERROR_STATE();</span></p>
+<p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">THROW</span>
+<span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CATCH;</span>
+<span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><br></span></p>
+</div></blockquote>
+</section>
+<section id="span-style-font-size-14px-color-rgb-23-23-23-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-span-span-class-hljs-keyword-style-font-size-14px-box-sizing-inherit-outline-color-inherit-color-rgb-1-1-253-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-error-span-rendszervaltozo">
+<h3><span style="font-size: 14px; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;&#64;</span><span class="hljs-keyword" style="font-size: 14px; box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">ERROR</span> - rendszerváltozó<a class="headerlink" href="#span-style-font-size-14px-color-rgb-23-23-23-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-span-span-class-hljs-keyword-style-font-size-14px-box-sizing-inherit-outline-color-inherit-color-rgb-1-1-253-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-error-span-rendszervaltozo" title="Permalink to this heading">#</a></h3>
+<p>Minden kifejezés után ujra be van állitva. Abban az esetben ha 0 ha az előző kifejezés sikeresen vegre lett hajtva különben 0-tol különböző.
+<span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">IF &#64;&#64;ERROR &lt;&gt; 0 </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">BEGIN</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span>
+Feladatok: felhasználva az előző tárolt eljárást bővitsük ki a bemeneti paraméter validálásával és abban az esetben ha nem létzik alkalmazzunk hibakezelést.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">THROW</span><span class="w"> </span><span class="mi">51000</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;The record does not exist.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html">Total execution time: 00:00:00.002</div></div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="nezetek">
+<h1>Nézetek<a class="headerlink" href="#nezetek" title="Permalink to this heading">#</a></h1>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">VIEW</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&lt;schema_name.view_name&gt; [&lt;column_alias_list&gt;]</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AS</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">select_statement;</span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="temporalis-tablak">
+<h1>Temporális táblák<a class="headerlink" href="#temporalis-tablak" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="span-style-font-size-14px-letrehozas-es-adatok-hozaadasa-span">
+<h1><span style="font-size: 14px;">Létrehozás és adatok hozáadása</span><a class="headerlink" href="#span-style-font-size-14px-letrehozas-es-adatok-hozaadasa-span" title="Permalink to this heading">#</a></h1>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TABLE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">#Products ( ProductID </span> <span class="hljs-built_in" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INT</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">PRIMARY </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">KEY</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">, ProductName </span> <span class="hljs-built_in" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">varchar</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">, … );</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INSERT</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">#Products (ProductID, ProductName, ProductDescription) </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">VALUES</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">(</span><span class="hljs-number" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">1</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">, </span> <span class="hljs-string" style="box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">’The temporary time leap’</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">, </span> <span class="hljs-string" style="box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">’A novel about temporary time leaping.’</span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">);</span></p>
+<p><span class="crayon-k" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 0, 255) !important;">SELECT</span> <span class="crayon-o" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(128, 128, 128) !important;">*</span> <span class="crayon-k" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 0, 255) !important;">INTO</span> <span style="color: rgb(0, 0, 0); font-family: &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre-wrap; background-color: rgb(255, 255, 255);">#</span><span class="crayon-i" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 128, 128) !important;">TempLocation</span> <span class="crayon-k" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 0, 255) !important;">FROM</span> <span class="crayon-i" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 128, 128) !important;">Production</span><span class="crayon-sy" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(51, 51, 51) !important;">.</span><span class="crayon-i" style="margin: 0px; padding: 0px; border: 0px; font-size: 12px; vertical-align: baseline; font-family: &quot;Courier New&quot;, monospace; height: inherit; white-space: pre-wrap; background-color: rgb(255, 255, 255); line-height: inherit !important; color: rgb(0, 128, 128) !important;">Location</span></p>
+<p>Megj: Globális temporális táblák</p>
+<p><span style="color: rgb(58, 58, 58); font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 15px; white-space: pre-wrap; background-color: rgba(204, 204, 204, 0.2);">SELECT name, age, gender INTO ##FemaleStudents FROM student WHERE gender = ‘Female’</span></p>
+<p>Feladatok:</p>
+<p>- Hozzunk létre egy nézetet mely megadja az osszes biciklit a tipusával és az árával együtt</p>
+<p>- Készitsünk ezzel egy temporális táblát csak a Mountain Bike-okkal</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Bikes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(4 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.009</div><div class="output text_html"><table><tr><th>ProductCategoryID</th><th>ParentProductCategoryID</th><th>Name</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>1</td><td>NULL</td><td>Bikes</td><td>cfbda25c-df71-47a7-b81b-64ee161aa37c</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>5</td><td>1</td><td>Mountain Bikes</td><td>2d364ade-264a-433c-b092-4fcbf3804e01</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>6</td><td>1</td><td>Road Bikes</td><td>000310c0-bcc8-42c4-b0c3-45ae611af06b</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>7</td><td>1</td><td>Touring Bikes</td><td>02c5061d-ecdc-4274-b5f1-e91d76bc3f37</td><td>2002-06-01 00:00:00.000</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="n">ListPrice</span><span class="p">,</span><span class="n">ProductID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Bikes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(97 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.012</div><div class="output text_html"><table><tr><th>Name</th><th>ListPrice</th><th>ProductID</th></tr><tr><td>Road-150 Red, 62</td><td>3578.27</td><td>749</td></tr><tr><td>Road-150 Red, 44</td><td>3578.27</td><td>750</td></tr><tr><td>Road-150 Red, 48</td><td>3578.27</td><td>751</td></tr><tr><td>Road-150 Red, 52</td><td>3578.27</td><td>752</td></tr><tr><td>Road-150 Red, 56</td><td>3578.27</td><td>753</td></tr><tr><td>Road-450 Red, 58</td><td>1457.99</td><td>754</td></tr><tr><td>Road-450 Red, 60</td><td>1457.99</td><td>755</td></tr><tr><td>Road-450 Red, 44</td><td>1457.99</td><td>756</td></tr><tr><td>Road-450 Red, 48</td><td>1457.99</td><td>757</td></tr><tr><td>Road-450 Red, 52</td><td>1457.99</td><td>758</td></tr><tr><td>Road-650 Red, 58</td><td>782.99</td><td>759</td></tr><tr><td>Road-650 Red, 60</td><td>782.99</td><td>760</td></tr><tr><td>Road-650 Red, 62</td><td>782.99</td><td>761</td></tr><tr><td>Road-650 Red, 44</td><td>782.99</td><td>762</td></tr><tr><td>Road-650 Red, 48</td><td>782.99</td><td>763</td></tr><tr><td>Road-650 Red, 52</td><td>782.99</td><td>764</td></tr><tr><td>Road-650 Black, 58</td><td>782.99</td><td>765</td></tr><tr><td>Road-650 Black, 60</td><td>782.99</td><td>766</td></tr><tr><td>Road-650 Black, 62</td><td>782.99</td><td>767</td></tr><tr><td>Road-650 Black, 44</td><td>782.99</td><td>768</td></tr><tr><td>Road-650 Black, 48</td><td>782.99</td><td>769</td></tr><tr><td>Road-650 Black, 52</td><td>782.99</td><td>770</td></tr><tr><td>Mountain-100 Silver, 38</td><td>3399.99</td><td>771</td></tr><tr><td>Mountain-100 Silver, 42</td><td>3399.99</td><td>772</td></tr><tr><td>Mountain-100 Silver, 44</td><td>3399.99</td><td>773</td></tr><tr><td>Mountain-100 Silver, 48</td><td>3399.99</td><td>774</td></tr><tr><td>Mountain-100 Black, 38</td><td>3374.99</td><td>775</td></tr><tr><td>Mountain-100 Black, 42</td><td>3374.99</td><td>776</td></tr><tr><td>Mountain-100 Black, 44</td><td>3374.99</td><td>777</td></tr><tr><td>Mountain-100 Black, 48</td><td>3374.99</td><td>778</td></tr><tr><td>Mountain-200 Silver, 38</td><td>2319.99</td><td>779</td></tr><tr><td>Mountain-200 Silver, 42</td><td>2319.99</td><td>780</td></tr><tr><td>Mountain-200 Silver, 46</td><td>2319.99</td><td>781</td></tr><tr><td>Mountain-200 Black, 38</td><td>2294.99</td><td>782</td></tr><tr><td>Mountain-200 Black, 42</td><td>2294.99</td><td>783</td></tr><tr><td>Mountain-200 Black, 46</td><td>2294.99</td><td>784</td></tr><tr><td>Mountain-300 Black, 38</td><td>1079.99</td><td>785</td></tr><tr><td>Mountain-300 Black, 40</td><td>1079.99</td><td>786</td></tr><tr><td>Mountain-300 Black, 44</td><td>1079.99</td><td>787</td></tr><tr><td>Mountain-300 Black, 48</td><td>1079.99</td><td>788</td></tr><tr><td>Road-250 Red, 44</td><td>2443.35</td><td>789</td></tr><tr><td>Road-250 Red, 48</td><td>2443.35</td><td>790</td></tr><tr><td>Road-250 Red, 52</td><td>2443.35</td><td>791</td></tr><tr><td>Road-250 Red, 58</td><td>2443.35</td><td>792</td></tr><tr><td>Road-250 Black, 44</td><td>2443.35</td><td>793</td></tr><tr><td>Road-250 Black, 48</td><td>2443.35</td><td>794</td></tr><tr><td>Road-250 Black, 52</td><td>2443.35</td><td>795</td></tr><tr><td>Road-250 Black, 58</td><td>2443.35</td><td>796</td></tr><tr><td>Road-550-W Yellow, 38</td><td>1120.49</td><td>797</td></tr><tr><td>Road-550-W Yellow, 40</td><td>1120.49</td><td>798</td></tr><tr><td>Road-550-W Yellow, 42</td><td>1120.49</td><td>799</td></tr><tr><td>Road-550-W Yellow, 44</td><td>1120.49</td><td>800</td></tr><tr><td>Road-550-W Yellow, 48</td><td>1120.49</td><td>801</td></tr><tr><td>Touring-2000 Blue, 60</td><td>1214.85</td><td>953</td></tr><tr><td>Touring-1000 Yellow, 46</td><td>2384.07</td><td>954</td></tr><tr><td>Touring-1000 Yellow, 50</td><td>2384.07</td><td>955</td></tr><tr><td>Touring-1000 Yellow, 54</td><td>2384.07</td><td>956</td></tr><tr><td>Touring-1000 Yellow, 60</td><td>2384.07</td><td>957</td></tr><tr><td>Touring-3000 Blue, 54</td><td>742.35</td><td>958</td></tr><tr><td>Touring-3000 Blue, 58</td><td>742.35</td><td>959</td></tr><tr><td>Touring-3000 Blue, 62</td><td>742.35</td><td>960</td></tr><tr><td>Touring-3000 Yellow, 44</td><td>742.35</td><td>961</td></tr><tr><td>Touring-3000 Yellow, 50</td><td>742.35</td><td>962</td></tr><tr><td>Touring-3000 Yellow, 54</td><td>742.35</td><td>963</td></tr><tr><td>Touring-3000 Yellow, 58</td><td>742.35</td><td>964</td></tr><tr><td>Touring-3000 Yellow, 62</td><td>742.35</td><td>965</td></tr><tr><td>Touring-1000 Blue, 46</td><td>2384.07</td><td>966</td></tr><tr><td>Touring-1000 Blue, 50</td><td>2384.07</td><td>967</td></tr><tr><td>Touring-1000 Blue, 54</td><td>2384.07</td><td>968</td></tr><tr><td>Touring-1000 Blue, 60</td><td>2384.07</td><td>969</td></tr><tr><td>Touring-2000 Blue, 46</td><td>1214.85</td><td>970</td></tr><tr><td>Touring-2000 Blue, 50</td><td>1214.85</td><td>971</td></tr><tr><td>Touring-2000 Blue, 54</td><td>1214.85</td><td>972</td></tr><tr><td>Road-350-W Yellow, 40</td><td>1700.99</td><td>973</td></tr><tr><td>Road-350-W Yellow, 42</td><td>1700.99</td><td>974</td></tr><tr><td>Road-350-W Yellow, 44</td><td>1700.99</td><td>975</td></tr><tr><td>Road-350-W Yellow, 48</td><td>1700.99</td><td>976</td></tr><tr><td>Road-750 Black, 58</td><td>539.99</td><td>977</td></tr><tr><td>Touring-3000 Blue, 44</td><td>742.35</td><td>978</td></tr><tr><td>Touring-3000 Blue, 50</td><td>742.35</td><td>979</td></tr><tr><td>Mountain-400-W Silver, 38</td><td>769.49</td><td>980</td></tr><tr><td>Mountain-400-W Silver, 40</td><td>769.49</td><td>981</td></tr><tr><td>Mountain-400-W Silver, 42</td><td>769.49</td><td>982</td></tr><tr><td>Mountain-400-W Silver, 46</td><td>769.49</td><td>983</td></tr><tr><td>Mountain-500 Silver, 40</td><td>564.99</td><td>984</td></tr><tr><td>Mountain-500 Silver, 42</td><td>564.99</td><td>985</td></tr><tr><td>Mountain-500 Silver, 44</td><td>564.99</td><td>986</td></tr><tr><td>Mountain-500 Silver, 48</td><td>564.99</td><td>987</td></tr><tr><td>Mountain-500 Silver, 52</td><td>564.99</td><td>988</td></tr><tr><td>Mountain-500 Black, 40</td><td>539.99</td><td>989</td></tr><tr><td>Mountain-500 Black, 42</td><td>539.99</td><td>990</td></tr><tr><td>Mountain-500 Black, 44</td><td>539.99</td><td>991</td></tr><tr><td>Mountain-500 Black, 48</td><td>539.99</td><td>992</td></tr><tr><td>Mountain-500 Black, 52</td><td>539.99</td><td>993</td></tr><tr><td>Road-750 Black, 44</td><td>539.99</td><td>997</td></tr><tr><td>Road-750 Black, 48</td><td>539.99</td><td>998</td></tr><tr><td>Road-750 Black, 52</td><td>539.99</td><td>999</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">Biciklik</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="n">ListPrice</span><span class="p">,</span><span class="n">ProductID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Bikes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.005</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">#</span><span class="n">Bicikli</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">Nev</span><span class="w">  </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="n">Ar</span><span class="w">  </span><span class="n">MONEY</span><span class="p">,</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.002</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">#</span><span class="n">Bicikli</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Biciklik</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(97 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.006</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">#</span><span class="n">Bicikli</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(98 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.010</div><div class="output text_html"><table><tr><th>Nev</th><th>Ar</th><th>ID</th></tr><tr><td>BMX</td><td>234.00</td><td>1000</td></tr><tr><td>Road-150 Red, 62</td><td>3578.27</td><td>749</td></tr><tr><td>Road-150 Red, 44</td><td>3578.27</td><td>750</td></tr><tr><td>Road-150 Red, 48</td><td>3578.27</td><td>751</td></tr><tr><td>Road-150 Red, 52</td><td>3578.27</td><td>752</td></tr><tr><td>Road-150 Red, 56</td><td>3578.27</td><td>753</td></tr><tr><td>Road-450 Red, 58</td><td>1457.99</td><td>754</td></tr><tr><td>Road-450 Red, 60</td><td>1457.99</td><td>755</td></tr><tr><td>Road-450 Red, 44</td><td>1457.99</td><td>756</td></tr><tr><td>Road-450 Red, 48</td><td>1457.99</td><td>757</td></tr><tr><td>Road-450 Red, 52</td><td>1457.99</td><td>758</td></tr><tr><td>Road-650 Red, 58</td><td>782.99</td><td>759</td></tr><tr><td>Road-650 Red, 60</td><td>782.99</td><td>760</td></tr><tr><td>Road-650 Red, 62</td><td>782.99</td><td>761</td></tr><tr><td>Road-650 Red, 44</td><td>782.99</td><td>762</td></tr><tr><td>Road-650 Red, 48</td><td>782.99</td><td>763</td></tr><tr><td>Road-650 Red, 52</td><td>782.99</td><td>764</td></tr><tr><td>Road-650 Black, 58</td><td>782.99</td><td>765</td></tr><tr><td>Road-650 Black, 60</td><td>782.99</td><td>766</td></tr><tr><td>Road-650 Black, 62</td><td>782.99</td><td>767</td></tr><tr><td>Road-650 Black, 44</td><td>782.99</td><td>768</td></tr><tr><td>Road-650 Black, 48</td><td>782.99</td><td>769</td></tr><tr><td>Road-650 Black, 52</td><td>782.99</td><td>770</td></tr><tr><td>Mountain-100 Silver, 38</td><td>3399.99</td><td>771</td></tr><tr><td>Mountain-100 Silver, 42</td><td>3399.99</td><td>772</td></tr><tr><td>Mountain-100 Silver, 44</td><td>3399.99</td><td>773</td></tr><tr><td>Mountain-100 Silver, 48</td><td>3399.99</td><td>774</td></tr><tr><td>Mountain-100 Black, 38</td><td>3374.99</td><td>775</td></tr><tr><td>Mountain-100 Black, 42</td><td>3374.99</td><td>776</td></tr><tr><td>Mountain-100 Black, 44</td><td>3374.99</td><td>777</td></tr><tr><td>Mountain-100 Black, 48</td><td>3374.99</td><td>778</td></tr><tr><td>Mountain-200 Silver, 38</td><td>2319.99</td><td>779</td></tr><tr><td>Mountain-200 Silver, 42</td><td>2319.99</td><td>780</td></tr><tr><td>Mountain-200 Silver, 46</td><td>2319.99</td><td>781</td></tr><tr><td>Mountain-200 Black, 38</td><td>2294.99</td><td>782</td></tr><tr><td>Mountain-200 Black, 42</td><td>2294.99</td><td>783</td></tr><tr><td>Mountain-200 Black, 46</td><td>2294.99</td><td>784</td></tr><tr><td>Mountain-300 Black, 38</td><td>1079.99</td><td>785</td></tr><tr><td>Mountain-300 Black, 40</td><td>1079.99</td><td>786</td></tr><tr><td>Mountain-300 Black, 44</td><td>1079.99</td><td>787</td></tr><tr><td>Mountain-300 Black, 48</td><td>1079.99</td><td>788</td></tr><tr><td>Road-250 Red, 44</td><td>2443.35</td><td>789</td></tr><tr><td>Road-250 Red, 48</td><td>2443.35</td><td>790</td></tr><tr><td>Road-250 Red, 52</td><td>2443.35</td><td>791</td></tr><tr><td>Road-250 Red, 58</td><td>2443.35</td><td>792</td></tr><tr><td>Road-250 Black, 44</td><td>2443.35</td><td>793</td></tr><tr><td>Road-250 Black, 48</td><td>2443.35</td><td>794</td></tr><tr><td>Road-250 Black, 52</td><td>2443.35</td><td>795</td></tr><tr><td>Road-250 Black, 58</td><td>2443.35</td><td>796</td></tr><tr><td>Road-550-W Yellow, 38</td><td>1120.49</td><td>797</td></tr><tr><td>Road-550-W Yellow, 40</td><td>1120.49</td><td>798</td></tr><tr><td>Road-550-W Yellow, 42</td><td>1120.49</td><td>799</td></tr><tr><td>Road-550-W Yellow, 44</td><td>1120.49</td><td>800</td></tr><tr><td>Road-550-W Yellow, 48</td><td>1120.49</td><td>801</td></tr><tr><td>Touring-2000 Blue, 60</td><td>1214.85</td><td>953</td></tr><tr><td>Touring-1000 Yellow, 46</td><td>2384.07</td><td>954</td></tr><tr><td>Touring-1000 Yellow, 50</td><td>2384.07</td><td>955</td></tr><tr><td>Touring-1000 Yellow, 54</td><td>2384.07</td><td>956</td></tr><tr><td>Touring-1000 Yellow, 60</td><td>2384.07</td><td>957</td></tr><tr><td>Touring-3000 Blue, 54</td><td>742.35</td><td>958</td></tr><tr><td>Touring-3000 Blue, 58</td><td>742.35</td><td>959</td></tr><tr><td>Touring-3000 Blue, 62</td><td>742.35</td><td>960</td></tr><tr><td>Touring-3000 Yellow, 44</td><td>742.35</td><td>961</td></tr><tr><td>Touring-3000 Yellow, 50</td><td>742.35</td><td>962</td></tr><tr><td>Touring-3000 Yellow, 54</td><td>742.35</td><td>963</td></tr><tr><td>Touring-3000 Yellow, 58</td><td>742.35</td><td>964</td></tr><tr><td>Touring-3000 Yellow, 62</td><td>742.35</td><td>965</td></tr><tr><td>Touring-1000 Blue, 46</td><td>2384.07</td><td>966</td></tr><tr><td>Touring-1000 Blue, 50</td><td>2384.07</td><td>967</td></tr><tr><td>Touring-1000 Blue, 54</td><td>2384.07</td><td>968</td></tr><tr><td>Touring-1000 Blue, 60</td><td>2384.07</td><td>969</td></tr><tr><td>Touring-2000 Blue, 46</td><td>1214.85</td><td>970</td></tr><tr><td>Touring-2000 Blue, 50</td><td>1214.85</td><td>971</td></tr><tr><td>Touring-2000 Blue, 54</td><td>1214.85</td><td>972</td></tr><tr><td>Road-350-W Yellow, 40</td><td>1700.99</td><td>973</td></tr><tr><td>Road-350-W Yellow, 42</td><td>1700.99</td><td>974</td></tr><tr><td>Road-350-W Yellow, 44</td><td>1700.99</td><td>975</td></tr><tr><td>Road-350-W Yellow, 48</td><td>1700.99</td><td>976</td></tr><tr><td>Road-750 Black, 58</td><td>539.99</td><td>977</td></tr><tr><td>Touring-3000 Blue, 44</td><td>742.35</td><td>978</td></tr><tr><td>Touring-3000 Blue, 50</td><td>742.35</td><td>979</td></tr><tr><td>Mountain-400-W Silver, 38</td><td>769.49</td><td>980</td></tr><tr><td>Mountain-400-W Silver, 40</td><td>769.49</td><td>981</td></tr><tr><td>Mountain-400-W Silver, 42</td><td>769.49</td><td>982</td></tr><tr><td>Mountain-400-W Silver, 46</td><td>769.49</td><td>983</td></tr><tr><td>Mountain-500 Silver, 40</td><td>564.99</td><td>984</td></tr><tr><td>Mountain-500 Silver, 42</td><td>564.99</td><td>985</td></tr><tr><td>Mountain-500 Silver, 44</td><td>564.99</td><td>986</td></tr><tr><td>Mountain-500 Silver, 48</td><td>564.99</td><td>987</td></tr><tr><td>Mountain-500 Silver, 52</td><td>564.99</td><td>988</td></tr><tr><td>Mountain-500 Black, 40</td><td>539.99</td><td>989</td></tr><tr><td>Mountain-500 Black, 42</td><td>539.99</td><td>990</td></tr><tr><td>Mountain-500 Black, 44</td><td>539.99</td><td>991</td></tr><tr><td>Mountain-500 Black, 48</td><td>539.99</td><td>992</td></tr><tr><td>Mountain-500 Black, 52</td><td>539.99</td><td>993</td></tr><tr><td>Road-750 Black, 44</td><td>539.99</td><td>997</td></tr><tr><td>Road-750 Black, 48</td><td>539.99</td><td>998</td></tr><tr><td>Road-750 Black, 52</td><td>539.99</td><td>999</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="n">ListPrice</span><span class="p">,</span><span class="n">ProductID</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">#</span><span class="n">Bicikli2</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Bikes&#39;</span><span class="p">)</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">#</span><span class="n">Bicikli2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(97 rows affected)</div><div class="output text_html">(97 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.021</div><div class="output text_html"><table><tr><th>Name</th><th>ListPrice</th><th>ProductID</th></tr><tr><td>Road-150 Red, 62</td><td>3578.27</td><td>749</td></tr><tr><td>Road-150 Red, 44</td><td>3578.27</td><td>750</td></tr><tr><td>Road-150 Red, 48</td><td>3578.27</td><td>751</td></tr><tr><td>Road-150 Red, 52</td><td>3578.27</td><td>752</td></tr><tr><td>Road-150 Red, 56</td><td>3578.27</td><td>753</td></tr><tr><td>Road-450 Red, 58</td><td>1457.99</td><td>754</td></tr><tr><td>Road-450 Red, 60</td><td>1457.99</td><td>755</td></tr><tr><td>Road-450 Red, 44</td><td>1457.99</td><td>756</td></tr><tr><td>Road-450 Red, 48</td><td>1457.99</td><td>757</td></tr><tr><td>Road-450 Red, 52</td><td>1457.99</td><td>758</td></tr><tr><td>Road-650 Red, 58</td><td>782.99</td><td>759</td></tr><tr><td>Road-650 Red, 60</td><td>782.99</td><td>760</td></tr><tr><td>Road-650 Red, 62</td><td>782.99</td><td>761</td></tr><tr><td>Road-650 Red, 44</td><td>782.99</td><td>762</td></tr><tr><td>Road-650 Red, 48</td><td>782.99</td><td>763</td></tr><tr><td>Road-650 Red, 52</td><td>782.99</td><td>764</td></tr><tr><td>Road-650 Black, 58</td><td>782.99</td><td>765</td></tr><tr><td>Road-650 Black, 60</td><td>782.99</td><td>766</td></tr><tr><td>Road-650 Black, 62</td><td>782.99</td><td>767</td></tr><tr><td>Road-650 Black, 44</td><td>782.99</td><td>768</td></tr><tr><td>Road-650 Black, 48</td><td>782.99</td><td>769</td></tr><tr><td>Road-650 Black, 52</td><td>782.99</td><td>770</td></tr><tr><td>Mountain-100 Silver, 38</td><td>3399.99</td><td>771</td></tr><tr><td>Mountain-100 Silver, 42</td><td>3399.99</td><td>772</td></tr><tr><td>Mountain-100 Silver, 44</td><td>3399.99</td><td>773</td></tr><tr><td>Mountain-100 Silver, 48</td><td>3399.99</td><td>774</td></tr><tr><td>Mountain-100 Black, 38</td><td>3374.99</td><td>775</td></tr><tr><td>Mountain-100 Black, 42</td><td>3374.99</td><td>776</td></tr><tr><td>Mountain-100 Black, 44</td><td>3374.99</td><td>777</td></tr><tr><td>Mountain-100 Black, 48</td><td>3374.99</td><td>778</td></tr><tr><td>Mountain-200 Silver, 38</td><td>2319.99</td><td>779</td></tr><tr><td>Mountain-200 Silver, 42</td><td>2319.99</td><td>780</td></tr><tr><td>Mountain-200 Silver, 46</td><td>2319.99</td><td>781</td></tr><tr><td>Mountain-200 Black, 38</td><td>2294.99</td><td>782</td></tr><tr><td>Mountain-200 Black, 42</td><td>2294.99</td><td>783</td></tr><tr><td>Mountain-200 Black, 46</td><td>2294.99</td><td>784</td></tr><tr><td>Mountain-300 Black, 38</td><td>1079.99</td><td>785</td></tr><tr><td>Mountain-300 Black, 40</td><td>1079.99</td><td>786</td></tr><tr><td>Mountain-300 Black, 44</td><td>1079.99</td><td>787</td></tr><tr><td>Mountain-300 Black, 48</td><td>1079.99</td><td>788</td></tr><tr><td>Road-250 Red, 44</td><td>2443.35</td><td>789</td></tr><tr><td>Road-250 Red, 48</td><td>2443.35</td><td>790</td></tr><tr><td>Road-250 Red, 52</td><td>2443.35</td><td>791</td></tr><tr><td>Road-250 Red, 58</td><td>2443.35</td><td>792</td></tr><tr><td>Road-250 Black, 44</td><td>2443.35</td><td>793</td></tr><tr><td>Road-250 Black, 48</td><td>2443.35</td><td>794</td></tr><tr><td>Road-250 Black, 52</td><td>2443.35</td><td>795</td></tr><tr><td>Road-250 Black, 58</td><td>2443.35</td><td>796</td></tr><tr><td>Road-550-W Yellow, 38</td><td>1120.49</td><td>797</td></tr><tr><td>Road-550-W Yellow, 40</td><td>1120.49</td><td>798</td></tr><tr><td>Road-550-W Yellow, 42</td><td>1120.49</td><td>799</td></tr><tr><td>Road-550-W Yellow, 44</td><td>1120.49</td><td>800</td></tr><tr><td>Road-550-W Yellow, 48</td><td>1120.49</td><td>801</td></tr><tr><td>Touring-2000 Blue, 60</td><td>1214.85</td><td>953</td></tr><tr><td>Touring-1000 Yellow, 46</td><td>2384.07</td><td>954</td></tr><tr><td>Touring-1000 Yellow, 50</td><td>2384.07</td><td>955</td></tr><tr><td>Touring-1000 Yellow, 54</td><td>2384.07</td><td>956</td></tr><tr><td>Touring-1000 Yellow, 60</td><td>2384.07</td><td>957</td></tr><tr><td>Touring-3000 Blue, 54</td><td>742.35</td><td>958</td></tr><tr><td>Touring-3000 Blue, 58</td><td>742.35</td><td>959</td></tr><tr><td>Touring-3000 Blue, 62</td><td>742.35</td><td>960</td></tr><tr><td>Touring-3000 Yellow, 44</td><td>742.35</td><td>961</td></tr><tr><td>Touring-3000 Yellow, 50</td><td>742.35</td><td>962</td></tr><tr><td>Touring-3000 Yellow, 54</td><td>742.35</td><td>963</td></tr><tr><td>Touring-3000 Yellow, 58</td><td>742.35</td><td>964</td></tr><tr><td>Touring-3000 Yellow, 62</td><td>742.35</td><td>965</td></tr><tr><td>Touring-1000 Blue, 46</td><td>2384.07</td><td>966</td></tr><tr><td>Touring-1000 Blue, 50</td><td>2384.07</td><td>967</td></tr><tr><td>Touring-1000 Blue, 54</td><td>2384.07</td><td>968</td></tr><tr><td>Touring-1000 Blue, 60</td><td>2384.07</td><td>969</td></tr><tr><td>Touring-2000 Blue, 46</td><td>1214.85</td><td>970</td></tr><tr><td>Touring-2000 Blue, 50</td><td>1214.85</td><td>971</td></tr><tr><td>Touring-2000 Blue, 54</td><td>1214.85</td><td>972</td></tr><tr><td>Road-350-W Yellow, 40</td><td>1700.99</td><td>973</td></tr><tr><td>Road-350-W Yellow, 42</td><td>1700.99</td><td>974</td></tr><tr><td>Road-350-W Yellow, 44</td><td>1700.99</td><td>975</td></tr><tr><td>Road-350-W Yellow, 48</td><td>1700.99</td><td>976</td></tr><tr><td>Road-750 Black, 58</td><td>539.99</td><td>977</td></tr><tr><td>Touring-3000 Blue, 44</td><td>742.35</td><td>978</td></tr><tr><td>Touring-3000 Blue, 50</td><td>742.35</td><td>979</td></tr><tr><td>Mountain-400-W Silver, 38</td><td>769.49</td><td>980</td></tr><tr><td>Mountain-400-W Silver, 40</td><td>769.49</td><td>981</td></tr><tr><td>Mountain-400-W Silver, 42</td><td>769.49</td><td>982</td></tr><tr><td>Mountain-400-W Silver, 46</td><td>769.49</td><td>983</td></tr><tr><td>Mountain-500 Silver, 40</td><td>564.99</td><td>984</td></tr><tr><td>Mountain-500 Silver, 42</td><td>564.99</td><td>985</td></tr><tr><td>Mountain-500 Silver, 44</td><td>564.99</td><td>986</td></tr><tr><td>Mountain-500 Silver, 48</td><td>564.99</td><td>987</td></tr><tr><td>Mountain-500 Silver, 52</td><td>564.99</td><td>988</td></tr><tr><td>Mountain-500 Black, 40</td><td>539.99</td><td>989</td></tr><tr><td>Mountain-500 Black, 42</td><td>539.99</td><td>990</td></tr><tr><td>Mountain-500 Black, 44</td><td>539.99</td><td>991</td></tr><tr><td>Mountain-500 Black, 48</td><td>539.99</td><td>992</td></tr><tr><td>Mountain-500 Black, 52</td><td>539.99</td><td>993</td></tr><tr><td>Road-750 Black, 44</td><td>539.99</td><td>997</td></tr><tr><td>Road-750 Black, 48</td><td>539.99</td><td>998</td></tr><tr><td>Road-750 Black, 52</td><td>539.99</td><td>999</td></tr></table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fuggvenyek">
+<h1>Függvények<a class="headerlink" href="#fuggvenyek" title="Permalink to this heading">#</a></h1>
+<p>3 féle függvény definiálható:</p>
+<p>- Scalar-valued: 1 értéket visszatéritő</p>
+<p><span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FUNCTION</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FunName(&#64;ParamName </span> <span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><font color="#0101fd">paramType,…</font></span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">)</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">RETURNS</span> <span style="white-space: pre; background-color: rgb(242, 242, 242);">returnType</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AS</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">BEGIN</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">…RETURN(….)</span></p>
+<p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span></p>
+<p>- Inline: 1 lekérdezésből álló</p>
+<blockquote>
+<div><p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FUNCTION</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FunName(&#64;ParamName </span> <span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><font color="#0101fd">paramType</font></span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">) </span></p>
+</div></blockquote>
+<blockquote>
+<div><p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">RETURNS</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TABLE</span></p>
+</div></blockquote>
+<blockquote>
+<div><p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AS</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">RETURN</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">(SELECT…..)</span></p>
+</div></blockquote>
+<p>- Multi-statement:</p>
+<p><span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FUNCTION</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FunName(&#64;ParamName </span> <span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><font color="#0101fd">paramType</font></span><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">)</span></p>
+<blockquote>
+<div><p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">RETURNS</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">&#64;tableParameterName </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TABLE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">( FieldName </span> <span style="font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><font color="#0101fd">fieldType</font></span><span class="hljs-literal" style="box-sizing: inherit; outline-color: inherit; color: rgb(7, 112, 74); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">, </span> <span style="background-color: rgb(242, 242, 242); color: rgb(7, 112, 74); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre;">…. </span> <span style="background-color: rgb(242, 242, 242); color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre;">)</span></p>
+</div></blockquote>
+<p><span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AS</span> <span class="hljs-keyword" style="color: rgb(1, 1, 253); box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">BEGIN</span></p>
+<p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">DML(insert update delete) on </span> <span style="background-color: rgb(242, 242, 242); color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre;">&#64;tableParameterName</span></p>
+<p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">RETURN</span></p>
+<p><span style="color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">END</span></p>
+<p>Feladatok:<span style="color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><br></span></p>
+<p>- Irjunk függvényt amely paraméterként egy termék kategóriát kap majd visszatériti a kategóriába tartozó termékeket</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AdventureWorks2019</span><span class="p">.</span><span class="n">Production</span><span class="p">.</span><span class="n">ProductCategory</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(4 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.022</div><div class="output text_html"><table><tr><th>ProductCategoryID</th><th>Name</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>1</td><td>Bikes</td><td>cfbda25c-df71-47a7-b81b-64ee161aa37c</td><td>2008-04-30 00:00:00.000</td></tr><tr><td>2</td><td>Components</td><td>c657828d-d808-4aba-91a3-af2ce02300e9</td><td>2008-04-30 00:00:00.000</td></tr><tr><td>3</td><td>Clothing</td><td>10a7c342-ca82-48d4-8a38-46a2eb089b74</td><td>2008-04-30 00:00:00.000</td></tr><tr><td>4</td><td>Accessories</td><td>2be3be36-d9a2-4eee-b593-ed895d97c2a6</td><td>2008-04-30 00:00:00.000</td></tr></table></div></div>
+</div>
+<p>Extra material:</p>
+<p><a class="reference external" href="https://docs.microsoft.com/en-gb/learn/paths/write-advanced-transact-sql-queries/">https://docs.microsoft.com/en-gb/learn/paths/write-advanced-transact-sql-queries/</a></p>
+<p><a class="reference external" href="https://docs.microsoft.com/en-gb/learn/paths/program-transact-sql/">https://docs.microsoft.com/en-gb/learn/paths/program-transact-sql/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">Quantity</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">InvQuant</span>
+
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">Product</span>
+
+<span class="w">        </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">ProductInventory</span>
+
+<span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">ProductID</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%repulo%&#39;</span>
+
+
+
+
+<span class="w">       </span><span class="c1">-- group by Product.Name having Product.Name LIKE &#39;%bike%&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.012</div><div class="output text_html"><table><tr><th>InvQuant</th></tr><tr><td>NULL</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">termeknev</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;%bike%&#39;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">Quantity</span><span class="p">)</span><span class="w">  </span><span class="k">as</span><span class="w"> </span><span class="n">InvQuant</span>
+
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">Product</span>
+
+<span class="w">        </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">ProductInventory</span>
+
+<span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">ProductID</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%bike%&#39;</span>
+
+
+<span class="k">set</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">Quantity</span><span class="p">)</span><span class="w">   </span><span class="k">as</span><span class="w"> </span><span class="n">InvQuant</span>
+
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">Product</span>
+
+<span class="w">        </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">ProductInventory</span>
+
+<span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">ProductID</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="o">@</span><span class="n">termeknev</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- body of the stored procedure</span>
+
+<span class="n">print</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">576</div><div class="output text_html">Total execution time: 00:00:00.017</div><div class="output text_html"><table><tr><th>InvQuant</th></tr><tr><td>576</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">VanRaktaron</span>
+
+<span class="w">    </span><span class="o">@</span><span class="n">termeknev</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="k">AS</span>
+
+<span class="k">BEGIN</span>
+
+<span class="n">print</span><span class="w"> </span><span class="o">@</span><span class="n">termeknev</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;valami&#39;</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span><span class="w"> </span><span class="nb">int</span>
+
+<span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">Quantity</span><span class="p">)</span><span class="w">   </span><span class="k">as</span><span class="w"> </span><span class="n">InvQuant</span>
+
+<span class="w">        </span><span class="k">from</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">Product</span>
+
+<span class="w">        </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">Production</span><span class="p">.</span><span class="n">ProductInventory</span>
+
+<span class="w">        </span><span class="k">on</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ProductInventory</span><span class="p">.</span><span class="n">ProductID</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Product</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="o">@</span><span class="n">termeknev</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- body of the stored procedure</span>
+
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span>
+
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">osszeg</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">END</span>
+
+<span class="k">GO</span>
+
+<span class="c1">-- example to execute the stored procedure we just created</span>
+
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">retstatement</span><span class="w"> </span><span class="nb">int</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="o">@</span><span class="n">retstatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">VanRaktaron</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;%repulo%&#39;</span>
+
+<span class="n">Print</span><span class="w"> </span><span class="o">@</span><span class="n">retstatement</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">%repulo%valami</div><div class="output text_html"> </div><div class="output text_html">0</div><div class="output text_html">Total execution time: 00:00:00.017</div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "SQL"
+        },
+        kernelOptions: {
+            name: "SQL",
+            path: "./Szeminarium_5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'SQL'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Vátozók &amp; Vezérlő struktúrák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vezerlo-strukturak">Vezérlő struktúrák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarolt-eljarasok">Tárolt eljárások</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feladatok"><strong>Feladatok:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hibakezeles-tarolt-eljarasokban">Hibakezelés tárolt eljárásokban</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raiserror-parancs">RAISERROR parancs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throw">THROW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-14px-color-rgb-23-23-23-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-span-span-class-hljs-keyword-style-font-size-14px-box-sizing-inherit-outline-color-inherit-color-rgb-1-1-253-font-family-sfmono-regular-consolas-quot-liberation-mono-quot-menlo-courier-monospace-white-space-pre-background-color-rgb-242-242-242-error-span-rendszervaltozo"><span style='font-size: 14px; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);'>@@</span><span class="hljs-keyword" style='font-size: 14px; box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);'>ERROR</span> - rendszerváltozó</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nezetek">Nézetek</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#temporalis-tablak">Temporális táblák</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-font-size-14px-letrehozas-es-adatok-hozaadasa-span"><span style="font-size: 14px;">Létrehozás és adatok hozáadása</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fuggvenyek">Függvények</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

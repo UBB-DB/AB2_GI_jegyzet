@@ -6,6 +6,7 @@ Jelenleg a jegyzet a következő témaköröket tartalmazza:
 ```{tableofcontents}
 
 ```
+
 <!-- ## 1. [Adatbázisok tervezése](./adatbazisok-tervezese.md)
 ## 2. [Tranzakciók](./tranzakciok.md)
 ## 3. [Indexek](./indexek.md)

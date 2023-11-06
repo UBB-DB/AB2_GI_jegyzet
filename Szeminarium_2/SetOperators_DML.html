@@ -389,6 +389,47 @@ document.write(`
 <p>- Alkategóriája Road Bike vagy drágább mint 2000</p>
 <p>- Alkategóriája Touring Bike de nem drágább mint 2000</p>
 <p>- Olcsóbbak mint 2000 de nem Touring Bike alkategoriájuak</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">P</span><span class="w"> </span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span>
+<span class="k">ON</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Road Bikes&#39;</span>
+
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">P</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ListPrice</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">P</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ListPrice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2000</span>
+
+<span class="k">EXCEPT</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">P</span><span class="w"> </span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span>
+<span class="k">ON</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Touring Bikes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(246 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.008</div><div class="output text_html"><table><tr><th>Name</th></tr><tr><td>HL Road Frame - Black, 58</td></tr><tr><td>HL Road Frame - Red, 58</td></tr><tr><td>Sport-100 Helmet, Red</td></tr><tr><td>Sport-100 Helmet, Black</td></tr><tr><td>Mountain Bike Socks, M</td></tr><tr><td>Mountain Bike Socks, L</td></tr><tr><td>Sport-100 Helmet, Blue</td></tr><tr><td>AWC Logo Cap</td></tr><tr><td>Long-Sleeve Logo Jersey, S</td></tr><tr><td>Long-Sleeve Logo Jersey, M</td></tr><tr><td>Long-Sleeve Logo Jersey, L</td></tr><tr><td>Long-Sleeve Logo Jersey, XL</td></tr><tr><td>HL Road Frame - Red, 62</td></tr><tr><td>HL Road Frame - Red, 44</td></tr><tr><td>HL Road Frame - Red, 48</td></tr><tr><td>HL Road Frame - Red, 52</td></tr><tr><td>HL Road Frame - Red, 56</td></tr><tr><td>LL Road Frame - Black, 58</td></tr><tr><td>LL Road Frame - Black, 60</td></tr><tr><td>LL Road Frame - Black, 62</td></tr><tr><td>LL Road Frame - Red, 44</td></tr><tr><td>LL Road Frame - Red, 48</td></tr><tr><td>LL Road Frame - Red, 52</td></tr><tr><td>LL Road Frame - Red, 58</td></tr><tr><td>LL Road Frame - Red, 60</td></tr><tr><td>LL Road Frame - Red, 62</td></tr><tr><td>ML Road Frame - Red, 44</td></tr><tr><td>ML Road Frame - Red, 48</td></tr><tr><td>ML Road Frame - Red, 52</td></tr><tr><td>ML Road Frame - Red, 58</td></tr><tr><td>ML Road Frame - Red, 60</td></tr><tr><td>LL Road Frame - Black, 44</td></tr><tr><td>LL Road Frame - Black, 48</td></tr><tr><td>LL Road Frame - Black, 52</td></tr><tr><td>HL Mountain Frame - Silver, 42</td></tr><tr><td>HL Mountain Frame - Silver, 44</td></tr><tr><td>HL Mountain Frame - Silver, 48</td></tr><tr><td>HL Mountain Frame - Silver, 46</td></tr><tr><td>HL Mountain Frame - Black, 42</td></tr><tr><td>HL Mountain Frame - Black, 44</td></tr><tr><td>HL Mountain Frame - Black, 48</td></tr><tr><td>HL Mountain Frame - Black, 46</td></tr><tr><td>HL Mountain Frame - Black, 38</td></tr><tr><td>HL Mountain Frame - Silver, 38</td></tr><tr><td>Road-450 Red, 58</td></tr><tr><td>Road-450 Red, 60</td></tr><tr><td>Road-450 Red, 44</td></tr><tr><td>Road-450 Red, 48</td></tr><tr><td>Road-450 Red, 52</td></tr><tr><td>Road-650 Red, 58</td></tr><tr><td>Road-650 Red, 60</td></tr><tr><td>Road-650 Red, 62</td></tr><tr><td>Road-650 Red, 44</td></tr><tr><td>Road-650 Red, 48</td></tr><tr><td>Road-650 Red, 52</td></tr><tr><td>Road-650 Black, 58</td></tr><tr><td>Road-650 Black, 60</td></tr><tr><td>Road-650 Black, 62</td></tr><tr><td>Road-650 Black, 44</td></tr><tr><td>Road-650 Black, 48</td></tr><tr><td>Road-650 Black, 52</td></tr><tr><td>Mountain-300 Black, 38</td></tr><tr><td>Mountain-300 Black, 40</td></tr><tr><td>Mountain-300 Black, 44</td></tr><tr><td>Mountain-300 Black, 48</td></tr><tr><td>Road-550-W Yellow, 38</td></tr><tr><td>Road-550-W Yellow, 40</td></tr><tr><td>Road-550-W Yellow, 42</td></tr><tr><td>Road-550-W Yellow, 44</td></tr><tr><td>Road-550-W Yellow, 48</td></tr><tr><td>LL Fork</td></tr><tr><td>ML Fork</td></tr><tr><td>HL Fork</td></tr><tr><td>LL Headset</td></tr><tr><td>ML Headset</td></tr><tr><td>HL Headset</td></tr><tr><td>LL Mountain Handlebars</td></tr><tr><td>ML Mountain Handlebars</td></tr><tr><td>HL Mountain Handlebars</td></tr><tr><td>LL Road Handlebars</td></tr><tr><td>ML Road Handlebars</td></tr><tr><td>HL Road Handlebars</td></tr><tr><td>ML Mountain Frame - Black, 38</td></tr><tr><td>LL Mountain Front Wheel</td></tr><tr><td>ML Mountain Front Wheel</td></tr><tr><td>HL Mountain Front Wheel</td></tr><tr><td>LL Road Front Wheel</td></tr><tr><td>ML Road Front Wheel</td></tr><tr><td>HL Road Front Wheel</td></tr><tr><td>Touring Front Wheel</td></tr><tr><td>ML Road Frame-W - Yellow, 38</td></tr><tr><td>LL Mountain Rear Wheel</td></tr><tr><td>ML Mountain Rear Wheel</td></tr><tr><td>HL Mountain Rear Wheel</td></tr><tr><td>LL Road Rear Wheel</td></tr><tr><td>ML Road Rear Wheel</td></tr><tr><td>HL Road Rear Wheel</td></tr><tr><td>Touring Rear Wheel</td></tr><tr><td>ML Mountain Frame - Black, 40</td></tr><tr><td>ML Mountain Frame - Black, 44</td></tr><tr><td>ML Mountain Frame - Black, 48</td></tr><tr><td>ML Road Frame-W - Yellow, 40</td></tr><tr><td>ML Road Frame-W - Yellow, 42</td></tr><tr><td>ML Road Frame-W - Yellow, 44</td></tr><tr><td>ML Road Frame-W - Yellow, 48</td></tr><tr><td>HL Road Frame - Black, 62</td></tr><tr><td>HL Road Frame - Black, 44</td></tr><tr><td>HL Road Frame - Black, 48</td></tr><tr><td>HL Road Frame - Black, 52</td></tr><tr><td>Men&#39;s Sports Shorts, S</td></tr><tr><td>Touring-Panniers, Large</td></tr><tr><td>Cable Lock</td></tr><tr><td>Minipump</td></tr><tr><td>Mountain Pump</td></tr><tr><td>Taillights - Battery-Powered</td></tr><tr><td>Headlights - Dual-Beam</td></tr><tr><td>Headlights - Weatherproof</td></tr><tr><td>Men&#39;s Sports Shorts, M</td></tr><tr><td>Men&#39;s Sports Shorts, L</td></tr><tr><td>Men&#39;s Sports Shorts, XL</td></tr><tr><td>Women&#39;s Tights, S</td></tr><tr><td>Women&#39;s Tights, M</td></tr><tr><td>Women&#39;s Tights, L</td></tr><tr><td>Men&#39;s Bib-Shorts, S</td></tr><tr><td>Men&#39;s Bib-Shorts, M</td></tr><tr><td>Men&#39;s Bib-Shorts, L</td></tr><tr><td>Half-Finger Gloves, S</td></tr><tr><td>Half-Finger Gloves, M</td></tr><tr><td>Half-Finger Gloves, L</td></tr><tr><td>Full-Finger Gloves, S</td></tr><tr><td>Full-Finger Gloves, M</td></tr><tr><td>Full-Finger Gloves, L</td></tr><tr><td>Classic Vest, S</td></tr><tr><td>Classic Vest, M</td></tr><tr><td>Classic Vest, L</td></tr><tr><td>Women&#39;s Mountain Shorts, S</td></tr><tr><td>Women&#39;s Mountain Shorts, M</td></tr><tr><td>Women&#39;s Mountain Shorts, L</td></tr><tr><td>Water Bottle - 30 oz.</td></tr><tr><td>Mountain Bottle Cage</td></tr><tr><td>Road Bottle Cage</td></tr><tr><td>Patch Kit/8 Patches</td></tr><tr><td>Racing Socks, M</td></tr><tr><td>Racing Socks, L</td></tr><tr><td>Hitch Rack - 4-Bike</td></tr><tr><td>Bike Wash - Dissolver</td></tr><tr><td>Fender Set - Mountain</td></tr><tr><td>All-Purpose Bike Stand</td></tr><tr><td>Hydration Pack - 70 oz.</td></tr><tr><td>Short-Sleeve Classic Jersey, S</td></tr><tr><td>Short-Sleeve Classic Jersey, M</td></tr><tr><td>Short-Sleeve Classic Jersey, L</td></tr><tr><td>Short-Sleeve Classic Jersey, XL</td></tr><tr><td>HL Touring Frame - Yellow, 60</td></tr><tr><td>LL Touring Frame - Yellow, 62</td></tr><tr><td>HL Touring Frame - Yellow, 46</td></tr><tr><td>HL Touring Frame - Yellow, 50</td></tr><tr><td>HL Touring Frame - Yellow, 54</td></tr><tr><td>HL Touring Frame - Blue, 46</td></tr><tr><td>HL Touring Frame - Blue, 50</td></tr><tr><td>HL Touring Frame - Blue, 54</td></tr><tr><td>HL Touring Frame - Blue, 60</td></tr><tr><td>Rear Derailleur</td></tr><tr><td>LL Touring Frame - Blue, 50</td></tr><tr><td>LL Touring Frame - Blue, 54</td></tr><tr><td>LL Touring Frame - Blue, 58</td></tr><tr><td>LL Touring Frame - Blue, 62</td></tr><tr><td>LL Touring Frame - Yellow, 44</td></tr><tr><td>LL Touring Frame - Yellow, 50</td></tr><tr><td>LL Touring Frame - Yellow, 54</td></tr><tr><td>LL Touring Frame - Yellow, 58</td></tr><tr><td>LL Touring Frame - Blue, 44</td></tr><tr><td>ML Mountain Frame-W - Silver, 40</td></tr><tr><td>ML Mountain Frame-W - Silver, 42</td></tr><tr><td>ML Mountain Frame-W - Silver, 46</td></tr><tr><td>Rear Brakes</td></tr><tr><td>LL Mountain Seat/Saddle</td></tr><tr><td>ML Mountain Seat/Saddle</td></tr><tr><td>HL Mountain Seat/Saddle</td></tr><tr><td>LL Road Seat/Saddle</td></tr><tr><td>ML Road Seat/Saddle</td></tr><tr><td>HL Road Seat/Saddle</td></tr><tr><td>LL Touring Seat/Saddle</td></tr><tr><td>ML Touring Seat/Saddle</td></tr><tr><td>HL Touring Seat/Saddle</td></tr><tr><td>LL Mountain Frame - Silver, 42</td></tr><tr><td>LL Mountain Frame - Silver, 44</td></tr><tr><td>LL Mountain Frame - Silver, 48</td></tr><tr><td>LL Mountain Frame - Silver, 52</td></tr><tr><td>Mountain Tire Tube</td></tr><tr><td>Road Tire Tube</td></tr><tr><td>Touring Tire Tube</td></tr><tr><td>LL Mountain Frame - Black, 42</td></tr><tr><td>LL Mountain Frame - Black, 44</td></tr><tr><td>LL Mountain Frame - Black, 48</td></tr><tr><td>LL Mountain Frame - Black, 52</td></tr><tr><td>LL Mountain Tire</td></tr><tr><td>ML Mountain Tire</td></tr><tr><td>HL Mountain Tire</td></tr><tr><td>LL Road Tire</td></tr><tr><td>ML Road Tire</td></tr><tr><td>HL Road Tire</td></tr><tr><td>Touring Tire</td></tr><tr><td>LL Mountain Pedal</td></tr><tr><td>ML Mountain Pedal</td></tr><tr><td>HL Mountain Pedal</td></tr><tr><td>LL Road Pedal</td></tr><tr><td>ML Road Pedal</td></tr><tr><td>HL Road Pedal</td></tr><tr><td>Touring Pedal</td></tr><tr><td>ML Mountain Frame-W - Silver, 38</td></tr><tr><td>LL Mountain Frame - Black, 40</td></tr><tr><td>LL Mountain Frame - Silver, 40</td></tr><tr><td>Front Derailleur</td></tr><tr><td>LL Touring Handlebars</td></tr><tr><td>HL Touring Handlebars</td></tr><tr><td>Front Brakes</td></tr><tr><td>LL Crankset</td></tr><tr><td>ML Crankset</td></tr><tr><td>HL Crankset</td></tr><tr><td>Chain</td></tr><tr><td>Road-350-W Yellow, 40</td></tr><tr><td>Road-350-W Yellow, 42</td></tr><tr><td>Road-350-W Yellow, 44</td></tr><tr><td>Road-350-W Yellow, 48</td></tr><tr><td>Road-750 Black, 58</td></tr><tr><td>Mountain-400-W Silver, 38</td></tr><tr><td>Mountain-400-W Silver, 40</td></tr><tr><td>Mountain-400-W Silver, 42</td></tr><tr><td>Mountain-400-W Silver, 46</td></tr><tr><td>Mountain-500 Silver, 40</td></tr><tr><td>Mountain-500 Silver, 42</td></tr><tr><td>Mountain-500 Silver, 44</td></tr><tr><td>Mountain-500 Silver, 48</td></tr><tr><td>Mountain-500 Silver, 52</td></tr><tr><td>Mountain-500 Black, 40</td></tr><tr><td>Mountain-500 Black, 42</td></tr><tr><td>Mountain-500 Black, 44</td></tr><tr><td>Mountain-500 Black, 48</td></tr><tr><td>Mountain-500 Black, 52</td></tr><tr><td>LL Bottom Bracket</td></tr><tr><td>ML Bottom Bracket</td></tr><tr><td>HL Bottom Bracket</td></tr><tr><td>Road-750 Black, 44</td></tr><tr><td>Road-750 Black, 48</td></tr><tr><td>Road-750 Black, 52</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">P</span><span class="w"> </span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span>
+<span class="k">ON</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">ProductCategoryID</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">PC</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Touring Bikes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(22 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.011</div><div class="output text_html"><table><tr><th>Name</th></tr><tr><td>Touring-2000 Blue, 60</td></tr><tr><td>Touring-1000 Yellow, 46</td></tr><tr><td>Touring-1000 Yellow, 50</td></tr><tr><td>Touring-1000 Yellow, 54</td></tr><tr><td>Touring-1000 Yellow, 60</td></tr><tr><td>Touring-3000 Blue, 54</td></tr><tr><td>Touring-3000 Blue, 58</td></tr><tr><td>Touring-3000 Blue, 62</td></tr><tr><td>Touring-3000 Yellow, 44</td></tr><tr><td>Touring-3000 Yellow, 50</td></tr><tr><td>Touring-3000 Yellow, 54</td></tr><tr><td>Touring-3000 Yellow, 58</td></tr><tr><td>Touring-3000 Yellow, 62</td></tr><tr><td>Touring-1000 Blue, 46</td></tr><tr><td>Touring-1000 Blue, 50</td></tr><tr><td>Touring-1000 Blue, 54</td></tr><tr><td>Touring-1000 Blue, 60</td></tr><tr><td>Touring-2000 Blue, 46</td></tr><tr><td>Touring-2000 Blue, 50</td></tr><tr><td>Touring-2000 Blue, 54</td></tr><tr><td>Touring-3000 Blue, 44</td></tr><tr><td>Touring-3000 Blue, 50</td></tr></table></div></div>
+</div>
 </section>
 <section id="dml-utasitasok">
 <h1>DML utasitások<a class="headerlink" href="#dml-utasitasok" title="Permalink to this heading">#</a></h1>
@@ -397,6 +438,59 @@ document.write(`
 <p>- Delete: törlésre</p>
 <p>Feladat:</p>
 <p>- Vonjunk le minden termék árából 10%-ot ahol az Ár nagyobb mint 2000</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span><span class="w"> </span><span class="p">(</span><span class="n">Name</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;BMX Bikes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.009</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="o">=</span><span class="s1">&#39;BMX Bikes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.017</div><div class="output text_html"><table><tr><th>ProductCategoryID</th><th>ParentProductCategoryID</th><th>Name</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>42</td><td>NULL</td><td>BMX Bikes</td><td>e6599db5-266c-41ff-8a6a-4a5994ea5517</td><td>2023-10-27 16:20:01.030</td></tr></table></div></div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Bikes%&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(4 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.010</div><div class="output text_html"><table><tr><th>ProductCategoryID</th><th>ParentProductCategoryID</th><th>Name</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>1</td><td>NULL</td><td>Bikes</td><td>cfbda25c-df71-47a7-b81b-64ee161aa37c</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>5</td><td>1</td><td>Mountain Bikes</td><td>2d364ade-264a-433c-b092-4fcbf3804e01</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>6</td><td>1</td><td>Road Bikes</td><td>000310c0-bcc8-42c4-b0c3-45ae611af06b</td><td>2002-06-01 00:00:00.000</td></tr><tr><td>7</td><td>1</td><td>Touring Bikes</td><td>02c5061d-ecdc-4274-b5f1-e91d76bc3f37</td><td>2002-06-01 00:00:00.000</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">ProductCategory</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">ParentProductCategoryID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;BMX Bikes&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.007</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Delete rows from table &#39;[]&#39; in schema &#39;[dbo]&#39;</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">ProductCategory</span><span class="p">]</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="o">=</span><span class="s1">&#39;BMX Bikes&#39;</span><span class="cm">/* add search conditions here */</span>
+<span class="k">GO</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.010</div></div>
+</div>
 <p><strong>CASE feltételes kifejezés</strong></p>
 <p>Segitségével több feltétel kiértékelésével térithetünk vissza 1 megfelelő értéket.</p>
 <p>Használható SELECT-ekkel és DML utasitásokkal együtt is</p>
@@ -421,16 +515,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "SQL"
         },
         kernelOptions: {
-            name: "python3",
+            name: "SQL",
             path: "./Szeminarium_2"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'SQL'</script>
 
                 </article>
               
