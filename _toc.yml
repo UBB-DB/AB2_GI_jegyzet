@@ -26,7 +26,7 @@ sections:
   title: "Szeminárium 3 -  Alkérdések"
 - file: Szeminarium_4/nezetek_taroltEljarasok
   title: "Szeminárium 4 - Delete, Nezetek, Tarolt eljárások(bevezető)"
-- file: Szeminarium_5/taroltEljarasokHibakezeles_fuggvenyek
+- file: Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek
   title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
 - file: Utmutato/01_telepitesi_utmutato
   title: "Telepitesi utmutató"
