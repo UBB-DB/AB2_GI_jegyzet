@@ -12,21 +12,24 @@ format: jb-article
 root: intro
 title: README
 sections:
-# - file: markdown
+  # - file: markdown
   # title: Bevezető
   # sections:
-- file: Szeminarium_1/gyakorlat
-  title: "Szeminárium 1 - Ismétlés"
-    # title: "Notebook"
-  # - file: markdown-notebooks
-  #   title: "Szeminárium"
-- file:  Szeminarium_2/SetOperators_DML
-  title: "Szeminárium 2 - Halmazműveletek, DML" 
-- file: Szeminarium_3/subqueries
-  title: "Szeminárium 3 -  Alkérdések"
-- file: Szeminarium_4/nezetek_taroltEljarasok
-  title: "Szeminárium 4 - Delete, Nezetek, Tarolt eljárások(bevezető)"
-- file: Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek
-  title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
-- file: Utmutato/01_telepitesi_utmutato
-  title: "Telepitesi utmutató"
+  - file: Szeminarium_1/gyakorlat
+    title:
+      "Szeminárium 1 - Ismétlés"
+      # title: "Notebook"
+    # - file: markdown-notebooks
+    #   title: "Szeminárium"
+  - file: Szeminarium_2/SetOperators_DML
+    title: "Szeminárium 2 - Halmazműveletek, DML"
+  - file: Szeminarium_3/subqueries
+    title: "Szeminárium 3 -  Alkérdések"
+  - file: Szeminarium_4/nezetek_taroltEljarasok
+    title: "Szeminárium 4 - Delete, Nezetek, Tarolt eljárások(bevezető)"
+  - file: Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek
+    title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
+  - file: Szeminarium_6/triggerek
+    title: "Szeminárium 6 -  Triggerek"
+  - file: Utmutato/01_telepitesi_utmutato
+    title: "Telepitesi utmutató"
