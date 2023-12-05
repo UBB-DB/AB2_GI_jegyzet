@@ -414,6 +414,217 @@ document.write(`
 <ul class="simple">
 <li><p>Írjunk triggert amely SalesOrderHeader táblára DELETE  műveletére   aktiválódik és  kitörli a megfelelő hivatkozásokat  a   SalesOrderDetail táblából</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w">  </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Eladas</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="k">FOR</span>
+<span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span>
+<span class="k">AS</span><span class="w"> </span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span><span class="w"> </span><span class="n">money</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">CURSOR</span><span class="w"> </span><span class="k">FOR</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span>
+<span class="w">    </span><span class="k">OPEN</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="n">WHILE</span><span class="w"> </span><span class="o">@@</span><span class="n">FETCH_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">        </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">id</span>
+<span class="w">        </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">CLOSE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">DEALLOCATE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">CURSORdelete</span><span class="w"> </span><span class="k">CURSOR</span><span class="w"> </span><span class="k">FOR</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span>
+<span class="w">    </span><span class="k">OPEN</span><span class="w"> </span><span class="n">CURSORdelete</span>
+<span class="w">    </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORdelete</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="n">WHILE</span><span class="w"> </span><span class="o">@@</span><span class="n">FETCH_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">        </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">id</span>
+<span class="w">        </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORdelete</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">CLOSE</span><span class="w"> </span><span class="n">CURSORdelete</span>
+<span class="w">    </span><span class="k">DEALLOCATE</span><span class="w"> </span><span class="n">CURSORdelete</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.004</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="p">(</span><span class="n">SalesOrderID</span><span class="p">,</span><span class="n">OrderQty</span><span class="p">,</span><span class="n">ProductID</span><span class="p">,</span><span class="n">UnitPrice</span><span class="p">,</span><span class="n">UnitPriceDiscount</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span>
+<span class="p">(</span><span class="mi">71776</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">907</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">),</span>
+<span class="p">(</span><span class="mi">71776</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">907</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(2 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.027</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">AdventureWorksLT2019</span><span class="p">.</span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.002</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="p">,</span><span class="w"> </span><span class="n">SalesOrderDetailID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AdventureWorksLT2019</span><span class="p">.</span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">71776</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(2 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.010</div><div class="output text_html"><table><tr><th>SalesOrderID</th><th>(No column name)</th><th>UnitPrice</th><th>SalesOrderDetailID</th></tr><tr><td>71776</td><td>-3</td><td>122.00</td><td>113425</td></tr><tr><td>71776</td><td>-8</td><td>120.00</td><td>113426</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="o">=</span><span class="mi">71776</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(4 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.003</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AdventureWorksLT2019</span><span class="p">.</span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.008</div><div class="output text_html"><table><tr><th>BeszerzesID</th><th>Osszeg</th></tr><tr><td>71776</td><td>1204.00</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w">  </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Eladas</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="k">FOR</span>
+<span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span>
+<span class="k">AS</span><span class="w"> </span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span><span class="w"> </span><span class="n">money</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">CURSOR</span><span class="w"> </span><span class="k">FOR</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span>
+<span class="w">    </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span>
+<span class="w">    </span><span class="k">OPEN</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="n">WHILE</span><span class="w"> </span><span class="o">@@</span><span class="n">FETCH_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">        </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">id</span>
+<span class="w">        </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">CLOSE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">DEALLOCATE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.003</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w">  </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Eladas</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="k">FOR</span>
+<span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span>
+<span class="k">AS</span><span class="w"> </span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span><span class="w"> </span><span class="n">money</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">CURSOR</span><span class="w"> </span><span class="k">FOR</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span>
+<span class="w">    </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="p">,</span><span class="w"> </span><span class="n">OrderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span>
+<span class="w">    </span><span class="k">OPEN</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="n">WHILE</span><span class="w"> </span><span class="o">@@</span><span class="n">FETCH_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">        </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">id</span>
+<span class="w">        </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">CURSORinsert</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">orderQty</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">unitPrice</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">CLOSE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="w">    </span><span class="k">DEALLOCATE</span><span class="w"> </span><span class="n">CURSORinsert</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.004</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">OrderQty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="o">=</span><span class="mi">71776</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">SalesOrderDetailID</span><span class="o">=</span><span class="mi">113425</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.014</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">--Írjunk triggert amely SalesOrderHeader táblára DELETE műveletére aktiválódik és kitörli a megfelelő hivatkozásokat a SalesOrderDetail táblából</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">trg_SalesOrderHeader_Delete</span><span class="p">]</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderHeader</span>
+<span class="k">INSTEAD</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="k">DELETE</span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span><span class="p">)</span>
+<span class="w">    </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesOrderHeader</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span><span class="p">)</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.003</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AdventureWorksLT2019</span><span class="p">.</span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderHeader</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">71782</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(0 rows affected)</div><div class="output text_html">(43 rows affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.028</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AdventureWorksLT2019</span><span class="p">.</span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">71782</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(0 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.004</div><div class="output text_html"><table><tr><th>SalesOrderID</th><th>SalesOrderDetailID</th><th>OrderQty</th><th>ProductID</th><th>UnitPrice</th><th>UnitPriceDiscount</th><th>LineTotal</th><th>rowguid</th><th>ModifiedDate</th></tr></table></div></div>
+</div>
 </section>
 </section>
 
