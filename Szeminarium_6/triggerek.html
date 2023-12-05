@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_6/triggerek';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Telepítési útmutató" href="../Utmutato/01_telepitesi_utmutato.html" />
+    <link rel="next" title="Kurzorok" href="../Szeminarium_8/kurzorok.html" />
     <link rel="prev" title="Vátozók &amp; Vezérlő struktúrák" href="../Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,6 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Szeminárium 6 -  Triggerek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_8/kurzorok.html">Szeminárium 8 - Kurzorok</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Utmutato/01_telepitesi_utmutato.html">Telepitesi utmutató</a></li>
 </ul>
 
@@ -376,19 +377,130 @@ document.write(`
 <li><p>Milyen műveletre vagy műveletekre sül el: INSERT, UPDATE, DELETE</p></li>
 <li><p>Mikor “sül” el: AFTER(FOR), INSTEAD OF</p></li>
 </ul>
-<p>Szintaxis:d</p>
+<p>Szintaxis:</p>
 <p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">CREATE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">OR</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">ALTER</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">] </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">TRIGGER</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ </span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">schema_name</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">. ]</span><span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">trigger_name</span> <span class="hljs-literal" style="box-sizing: inherit; outline-color: inherit; color: rgb(7, 112, 74); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253);">ON</span></span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">{ table | view }</span></p>
 <p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">{ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">FOR</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">| </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AFTER</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">| </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INSTEAD</span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">OF</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">}</span></p>
 <p><span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">{ [ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">INSERT</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">] [ , ] [ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">UPDATE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">] [ , ] [ </span> <span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">DELETE</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">] }</span></p>
 <p><span class="hljs-keyword" style="box-sizing: inherit; outline-color: inherit; color: rgb(1, 1, 253); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">AS</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">{ </span> <span class="hljs-variable" style="box-sizing: inherit; outline-color: inherit; color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">sql_statement</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);">[ ; ] [ ,…n ]</span> <span style="color: rgb(23, 23, 23); font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; white-space: pre; background-color: rgb(242, 242, 242);"> }</span></p>
 <p><strong>Inserted ás Deleted táblák a módositó művelet tipusától fuggően lesznek beállítva.</strong></p>
 <p><strong>Fontos: Csak 1 INSTEAD OF trigger definiálható 1 táblára.</strong></p>
-<p>Feladatok:</p>
-<p>- Készítsünk egy táblát Beszerzés névvel  BeszerzesID és Osszeg mezővel melynek célja majd beszerzesek összköltségét fogja kezelni.</p>
-<p>- Irjunk INSERT triggert a Purchasing.PurchaseOrderDetail tablara mely frissiti a Beszerzes tábla Ossszeg mezőjét Ossszeg = Ossszeg + PurchaseOrderDetail.OrderQty * PurchaseOrderDetail.UnitPrice. Abban az esetben ha az PurchaseOrderID nem jelenik meg a Beszerzések táblában szurjuk be azt</p>
-<p>- Bővítsük ki DELETE-re is és frissitsük a Ossszeget a törölt elemek alapján.</p>
-<p>Opc:</p>
-<p>- Írjunk triggert amely PurchaseOrderHeader táblára <span style="color: var(--vscode-foreground);">DELETE</span>  <span style="color: var(--vscode-foreground);">  műveletére</span> <span style="color: var(--vscode-foreground);"> aktiválódik és  kitörli a megfelelő hivatkozásokat  a </span> <span style="color: var(--vscode-foreground);">PurchaseOrderDetail táblából</span></p>
+<p>Feladatok:
+- Készítsünk egy táblát Beszerzés névvel  BeszerzesID és Osszeg mezővel melynek célja majd beszerzesek összköltségét fogja kezelni.
+- Irjunk INSERT triggert a Purchasing.PurchaseOrderDetail tablara mely frissiti a Beszerzes tábla Ossszeg mezőjét Ossszeg = Ossszeg + <span style="color: rgb(33, 33, 33); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;">SalesOrderDetail</span><span style="color: var(--vscode-foreground);">.OrderQty * </span>  <span style="color: rgb(33, 33, 33); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;">SalesOrderDetail</span><span style="color: var(--vscode-foreground);">.UnitPrice. Abban az esetben ha a </span> <span style="color: rgb(33, 33, 33); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 12px; white-space: pre;">SalesOrderID</span>  <span style="color: var(--vscode-foreground);">nem jelenik meg a Beszerzések táblában szurjuk be azt</span>
+- Bővítsük ki DELETE-re is és frissitsük a Ossszeget a törölt elemek alapján.
+Opc:
+- Írjunk triggert amely PurchaseOrderHeader táblára <span style="color: var(--vscode-foreground);">DELETE</span>      <span style="color: var(--vscode-foreground);">  műveletére</span>   <span style="color: var(--vscode-foreground);"> aktiválódik és  kitörli a megfelelő hivatkozásokat  a </span>   <span style="color: var(--vscode-foreground);">PurchaseOrderDetail táblából</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Create a new table called &#39;[TableName]&#39; in schema &#39;[dbo]&#39;</span>
+<span class="c1">-- Drop the table if it already exists</span>
+<span class="k">IF</span><span class="w"> </span><span class="n">OBJECT_ID</span><span class="p">(</span><span class="s1">&#39;[SalesLT].[Beszerzes]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;U&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Beszerzes</span><span class="p">]</span>
+<span class="k">GO</span>
+<span class="c1">-- Create the table in the specified schema</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Beszerzes</span><span class="p">]</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n">BeszerzesID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span><span class="c1">-- Primary Key column</span>
+<span class="w">    </span><span class="n">Osszeg</span><span class="w"> </span><span class="n">MONEY</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.002</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w">   </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Eladas</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="k">FOR</span>
+<span class="k">INSERT</span>
+<span class="k">AS</span><span class="w"> </span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span><span class="p">)</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">BeszerzesID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Beszerzes</span><span class="p">]</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">       </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">inserted</span><span class="p">.</span><span class="n">OrderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">inserted</span><span class="p">.</span><span class="n">UnitPrice</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">    </span><span class="k">JOIN</span><span class="w"> </span><span class="n">inserted</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inserted</span><span class="p">.</span><span class="n">SalesOrderID</span><span class="w"> </span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.004</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- SELECT * FROM SalesLT.SalesOrderDetail</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="p">(</span><span class="n">SalesOrderID</span><span class="p">,</span><span class="n">OrderQty</span><span class="p">,</span><span class="n">ProductID</span><span class="p">,</span><span class="n">UnitPrice</span><span class="p">,</span><span class="n">UnitPriceDiscount</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span>
+<span class="p">(</span><span class="mi">71776</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">907</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.022</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.007</div><div class="output text_html"><table><tr><th>BeszerzesID</th><th>Osszeg</th></tr><tr><td>71776</td><td>366.00</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w">   </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Eladas</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="k">FOR</span>
+<span class="k">DELETE</span>
+<span class="k">AS</span><span class="w"> </span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">deleted</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">deleted</span><span class="p">.</span><span class="n">OrderQty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">deleted</span><span class="p">.</span><span class="n">UnitPrice</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">    </span><span class="k">JOIN</span><span class="w"> </span><span class="n">deleted</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deleted</span><span class="p">.</span><span class="n">SalesOrderID</span><span class="w"> </span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Beszerzes</span><span class="p">.</span><span class="n">Osszeg</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Osszeg</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span>
+<span class="w">    </span><span class="n">BeszerzesID</span><span class="o">=@</span><span class="n">id</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Beszerzes</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">BeszerzesID</span><span class="o">=@</span><span class="n">id</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.005</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderDetailID</span><span class="o">=</span><span class="mi">113407</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.016</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="o">=</span><span class="mi">71776</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(3 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.012</div><div class="output text_html"><table><tr><th>SalesOrderID</th><th>SalesOrderDetailID</th><th>OrderQty</th><th>ProductID</th><th>UnitPrice</th><th>UnitPriceDiscount</th><th>LineTotal</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>71776</td><td>110567</td><td>1</td><td>907</td><td>63.90</td><td>0.00</td><td>63.900000</td><td>6dbfe398-d15d-425e-aa58-88178fe360e5</td><td>2008-06-01 00:00:00.000</td></tr><tr><td>71776</td><td>113407</td><td>2</td><td>907</td><td>63.90</td><td>0.00</td><td>127.800000</td><td>7f1b6cee-9c06-40f6-9cac-190bb895b264</td><td>2023-11-21 16:47:15.377</td></tr><tr><td>71776</td><td>113408</td><td>3</td><td>907</td><td>122.00</td><td>0.00</td><td>366.000000</td><td>02570667-a506-4017-b920-d5351e8b0e44</td><td>2023-11-21 16:50:15.347</td></tr></table></div></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -432,11 +544,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../Utmutato/01_telepitesi_utmutato.html"
+       href="../Szeminarium_8/kurzorok.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Telepítési útmutató</p>
+        <p class="prev-next-title">Kurzorok</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
