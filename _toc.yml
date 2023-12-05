@@ -31,5 +31,7 @@ sections:
     title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
   - file: Szeminarium_6/triggerek
     title: "Szeminárium 6 -  Triggerek"
+  - file: Szeminarium_8/kurzorok
+    title: "Szeminárium 8 - Kurzorok"
   - file: Utmutato/01_telepitesi_utmutato
     title: "Telepitesi utmutató"
