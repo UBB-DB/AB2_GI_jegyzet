@@ -1,0 +1,27 @@
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN TRY
+    PRINT '1. BEGIN TRY';
+    BEGIN TRANSACTION;
+    PRINT '2. BEGIN TRANSACTION';
+    INSERT INTO dbo.Orders  (custid, empid, orderdate, shipvia) VALUES   (68, 9, '2006-07-12', 1);
+    IF @@ERROR <> 0
+    BEGIN
+        RAISERROR('Error inserting into Orders', 16, 1);
+    END
+    
+    IF @@TRANCOUNT > 0
+    BEGIN
+        PRINT '3. COMMIT TRANSACTION';
+        COMMIT TRANSACTION;
+    END
+END TRY
+BEGIN CATCH
+    SELECT
+        ERROR_NUMBER()  AS ErrNum,
+        ERROR_MESSAGE()  AS ErrMsg;
+    IF @@TRANCOUNT > 0
+    BEGIN
+        PRINT '4. ROLLBACK TRANSACTION';
+        ROLLBACK TRANSACTION;
+    END
+END CATCH;

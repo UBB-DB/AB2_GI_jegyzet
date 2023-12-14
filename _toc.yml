@@ -33,5 +33,7 @@ sections:
     title: "Szeminárium 6 -  Triggerek"
   - file: Szeminarium_8/kurzorok
     title: "Szeminárium 8 - Kurzorok"
+  - file: Szeminarium_9/tranzakcio
+    title: "Szeminárium 9 - Tranzakciók"
   - file: Utmutato/01_telepitesi_utmutato
     title: "Telepitesi utmutató"
