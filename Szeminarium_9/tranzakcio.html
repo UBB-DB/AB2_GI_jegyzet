@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Alkérdések &#8212; My sample book</title>
+    <title>Tranzakciók &#8212; My sample book</title>
   
   
   
@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_3/subqueries';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_9/tranzakcio';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Delete utasitás" href="../Szeminarium_4/nezetek_taroltEljarasok.html" />
-    <link rel="prev" title="Halmazműveletek" href="../Szeminarium_2/SetOperators_DML.html" />
+    <link rel="next" title="Telepítési útmutató" href="../Utmutato/01_telepitesi_utmutato.html" />
+    <link rel="prev" title="Kurzorok" href="../Szeminarium_8/kurzorok.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -160,7 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_1/gyakorlat.html">Szeminárium 1 - Ismétlés</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_2/SetOperators_DML.html">Halmazműveletek</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Alkérdések</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_3/subqueries.html">Alkérdések</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_4/nezetek_taroltEljarasok.html">Delete utasitás</a></li>
 
@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_6/triggerek.html">Szeminárium 6 -  Triggerek</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Szeminarium_8/kurzorok.html">Szeminárium 8 - Kurzorok</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_9/tranzakcio.html">Szeminárium 9 - Tranzakciók</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Szeminárium 9 - Tranzakciók</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Utmutato/01_telepitesi_utmutato.html">Telepitesi utmutató</a></li>
 </ul>
 
@@ -246,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FSzeminarium_3/subqueries.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FSzeminarium_9/tranzakcio.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -276,7 +276,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Szeminarium_3/subqueries.ipynb" target="_blank"
+      <li><a href="../_sources/Szeminarium_9/tranzakcio.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +358,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Alkérdések</h1>
+    <h1>Tranzakciók</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,10 +368,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Alkérdések</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#feladatok">Feladatok</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span"><span style='background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:"Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;'>Feladat:</span></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -382,77 +380,50 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="alkerdesek">
-<h1>Alkérdések<a class="headerlink" href="#alkerdesek" title="Permalink to this heading">#</a></h1>
-<p>Alkérdés (beágyazott lekérdezés) = olyan lekérdezés, mely egy
-másik lekérdezés része.</p>
-<ul class="simple">
-<li><p>Szintaktikus alakja: beágyazott lekérdezés zárójelben.</p></li>
-<li><p>Használata: ahol relációnevet használunk:</p>
-<ul>
-<li><p>FROM záradékban – a tényleges relációk helyett alkérdéssel
-létrehozott ideiglenes tábla gyanánt</p></li>
-<li><p>WHERE záradékban: sorokra vonatkozó feltételek esetén</p></li>
-<li><p>HAVING záradékban: csoportokra vonatkozó feltételek esetén</p></li>
-</ul>
-</li>
-<li><p>Egyszerű alkérdés – olyan alkérdés, mely csak egyszer kerül
-kiértékelésre.</p></li>
-<li><p>Korrelált alkérdés – olyan alkérdés, amely többször is
-kiértékelődik.</p></li>
-</ul>
-<p>Pelda korrelalt alkérdezésre:
-A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak adatait, akik olyan rendeléseket helyeztek el, amelyek teljes rendelési értéke meghaladja az átlagos rendelési értéket. Használjunk alkerdest az átlagos rendelési érték kiszámításához, majd hasonlítsuk össze az egyéni rendelési értékeket.</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CustomerID</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">FirstName</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">LastName</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Customer</span><span class="w"> </span><span class="k">c</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderHeader</span><span class="w"> </span><span class="n">soh</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">soh</span><span class="p">.</span><span class="n">CustomerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">CustomerID</span>
-<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">soh</span><span class="p">.</span><span class="n">CustomerID</span>
-<span class="w">    </span><span class="k">HAVING</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">soh</span><span class="p">.</span><span class="n">TotalDue</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">TotalDue</span><span class="p">)</span>
-<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderHeader</span>
-<span class="w">    </span><span class="p">)</span>
-<span class="p">);</span>
-</pre></div>
-</div>
+  <section id="tranzakciok">
+<h1>Tranzakciók<a class="headerlink" href="#tranzakciok" title="Permalink to this heading">#</a></h1>
+<p>A tranzakciók használata elengedhetetlen az adatbázis konzisztenciájának megtartása érdekében!</p>
+<p><img alt="Diagram showing the difference between using transactions and not using transactions." src="https://docs.microsoft.com/en-gb/learn/wwl-data-ai/implement-transactions-transact-sql/media/transactions.png" /></p>
+<p>Minden esetben amikor a rendszer valamilyen műveletet végez azt tranzakció formájában teszi. Minden egyedi művelet maga egy tranzakció.</p>
+<p>Abban az esetben ha több műveletet szeretnénk egyben végrehajtani használhatunk explicit vagy implicit tranzakciókat.</p>
+<p><strong>Explicit tranzakció</strong><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><br></span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">BEGIN</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">{ </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRAN</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">| </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRANSACTION</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">} </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">[</span><span class="hljs-variable" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">transaction_name</span><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">]</span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">COMMIT</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">[ { </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRAN</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">| </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRANSACTION</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">} </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">[</span><span class="hljs-variable" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">transaction_name</span><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">]</span><span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);"><br></span></p>
+<p><span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">ROLLBACK</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">{ </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRAN</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">| </span> <span class="hljs-keyword" style="color:rgb(1, 1, 253);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">TRANSACTION</span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">} </span> <span style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">[</span><span class="hljs-variable" style="color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;background-color:rgb(242, 242, 242);">transaction_name</span><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">]</span></p>
+<p><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;">Pl.</span></p>
+<p><span style="color: #0000ff;">SET</span> <span style="color: #0000ff;">TRANSACTION</span> <span style="color: #0000ff;">ISOLATION</span> <span style="color: #0000ff;">LEVEL</span> <span style="color: #0000ff;">SERIALIZABLE</span>;</p>
+<p><span style="color: #0000ff;">BEGIN</span> <span style="color: #0000ff;">TRY</span></p>
+<p><span style="color: #0000ff;">PRINT</span> <span style="color: #a31515;">’1. BEGIN TRY’</span>;</p>
+<p><span style="color: #0000ff;">BEGIN</span> <span style="color: #0000ff;">TRANSACTION</span>;</p>
+<p><span style="color: #0000ff;">PRINT</span> <span style="color: #a31515;">’2. BEGIN TRANSACTION’</span>;</p>
+<p><span style="color: #0000ff;">INSERT INTO</span> dbo.Orders  (custid, empid, orderdate, shipvia) <span style="color: #0000ff;">VALUES</span>   (<span style="color: #09885a;">68</span>, <span style="color: #09885a;">9</span>, <span style="color: #a31515;">’2006-07-12’</span>, <span style="color: #09885a;">1</span>);</p>
+<p><span style="color: #0000ff;">IF</span> &#64;&#64;ERROR <span style="color: #000000;">&lt;&gt;</span> <span style="color: #09885a;">0</span></p>
+<p><span style="color: #0000ff;">BEGIN</span></p>
+<p><span style="color: #0000ff;">RAISERROR</span>(<span style="color: #a31515;">’Error inserting into Orders’</span>, <span style="color: #09885a;">16</span>, <span style="color: #09885a;">1</span>);</p>
+<p><span style="color: #0000ff;">END</span></p>
+<p><span style="color: #0000ff;">IF</span> &#64;&#64;TRANCOUNT <span style="color: #000000;">&gt;</span> <span style="color: #09885a;">0</span></p>
+<p><span style="color: #0000ff;">BEGIN</span></p>
+<p><span style="color: #0000ff;">PRINT</span> <span style="color: #a31515;">’3. COMMIT TRANSACTION’</span>;</p>
+<p><span style="color: #0000ff;">COMMIT</span> <span style="color: #0000ff;">TRANSACTION</span>;</p>
+<p><span style="color: #0000ff;">END</span></p>
+<p><span style="color: #0000ff;">END</span> <span style="color: #0000ff;">TRY</span></p>
+<p><span style="color: #0000ff;">BEGIN</span> <span style="color: #0000ff;">CATCH</span></p>
+<p><span style="color: #0000ff;">SELECT</span></p>
+<p><span style="color: #795e26;">ERROR_NUMBER</span>()  <span style="color: #0000ff;">AS</span> ErrNum,</p>
+<p><span style="color: #795e26;">ERROR_MESSAGE</span>()  <span style="color: #0000ff;">AS</span> ErrMsg;</p>
+<p><span style="color: #0000ff;">IF</span> &#64;&#64;TRANCOUNT <span style="color: #000000;">&gt;</span> <span style="color: #09885a;">0</span></p>
+<p><span style="color: #0000ff;">BEGIN</span></p>
+<p><span style="color: #0000ff;">PRINT</span> <span style="color: #a31515;">’4. ROLLBACK TRANSACTION’</span>;</p>
+<p><span style="color: #0000ff;">ROLLBACK</span> <span style="color: #0000ff;">TRANSACTION</span>;</p>
+<p><span style="color: #0000ff;">END</span></p>
+<p><span style="color: #0000ff;">END</span> <span style="color: #0000ff;">CATCH</span>;</p>
+<p><a class="reference download internal" download="" href="../_downloads/30e42be22b8ed2d13c4d9bfd94c5911c/example.sql"><span class="xref download myst">Pelda file</span></a></p>
+<p><strong>Implicit tranzakció</strong><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;"><br></span></p>
+<p>Abban az esetben ha Implicit trantzakciókat szeretnénk használni, <span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">SET IMPLICIT_TRANSACTIONS ON parancsal segitségével tehetjük meg. Ebben az esetben nem BEGIN TRANSACTION-el kezdődik egy tranzakció, hanem amint egy tranzakció befejeződik, egy uj tranzakció kezdődik. Egy implicit tranzakció ugyanúgy commit vagy rollback paranccsal véglegesithető.</span></p>
+<section id="span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span">
+<h2><span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Feladat:</span><a class="headerlink" href="#span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span" title="Permalink to this heading">#</a></h2>
+<p><span style="background-color:rgb(255, 255, 255);">- Irjunk tárolt eljárást mely beszúr a SalesLT.SalesOrderDetail táblába és frissiti a Sales.SalesOrderHeader SubTotal mezőjét egy tranzakción belül.</p>
 </section>
-<section id="feladatok">
-<h1>Feladatok<a class="headerlink" href="#feladatok" title="Permalink to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>Keressük meg a legjobban eladott terméke(ke)t a 2019-es AdventureWorksLT adatbázisban. Használjunk alkerdest azzal a céllal, hogy meghatározzuk a legtöbb eladott egységgel rendelkező terméket</p></li>
-</ol>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sod</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="n">p</span><span class="w"> </span>
-<span class="k">JOIN</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sod</span><span class="w"> </span>
-<span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sod</span><span class="p">.</span><span class="n">ProductID</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">Name</span>
-<span class="k">HAVING</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sod</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-<span class="w">    </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">TotalQuantity</span><span class="p">)</span>
-<span class="w">    </span><span class="k">FROM</span>
-<span class="w">        </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sodD</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
-<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sodD</span>
-<span class="w">        </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sodD</span><span class="p">.</span><span class="n">ProductID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span><span class="p">)</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">TotalQuantity</span><span class="w"> </span><span class="k">DESC</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li><p>Keressük meg azokat a termékeket, amelyeknek az árbevétele meghaladja a termékek átlagos árbevételét. Használjunk egy alkerdest az átlagos árbevétel kiszámításához, majd szűrjük a termékeket az alapján, hogy az árbevételük meghaladja ezt az átlagos értéket.</p></li>
-<li><p>Keressük meg azokat a termékeket, amelyekhez nincs rendelés az adatbázisban. Használjunk egy alpontot, hogy először meghatározzuk azokat a termékeket, amelyekhez rendelés tartozik, majd kérjük le az olyan termékeket, amelyek nem szerepelnek ebben az alpontban.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">TotalQuantity</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span>
-<span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">sodD</span><span class="p">.</span><span class="n">OrderQty</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">TotalQuantity</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="n">sodD</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sodD</span><span class="p">.</span><span class="n">ProductID</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.007</div><div class="output text_html"><table><tr><th>(No column name)</th></tr><tr><td>87</td></tr></table></div></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -468,7 +439,7 @@ A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak 
         },
         kernelOptions: {
             name: "SQL",
-            path: "./Szeminarium_3"
+            path: "./Szeminarium_9"
         },
         predefinedOutput: true
     }
@@ -487,20 +458,20 @@ A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak 
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Szeminarium_2/SetOperators_DML.html"
+       href="../Szeminarium_8/kurzorok.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Halmazműveletek</p>
+        <p class="prev-next-title">Kurzorok</p>
       </div>
     </a>
     <a class="right-next"
-       href="../Szeminarium_4/nezetek_taroltEljarasok.html"
+       href="../Utmutato/01_telepitesi_utmutato.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Delete utasitás</p>
+        <p class="prev-next-title">Telepítési útmutató</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -522,10 +493,8 @@ A 2019-es AdventureWorksLT adatbázisban keressük meg azoknak a vásárlóknak 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Alkérdések</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#feladatok">Feladatok</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span"><span style='background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:"Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;'>Feladat:</span></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
