@@ -426,7 +426,112 @@ document.write(`
 <p>Abban az esetben ha Implicit trantzakciókat szeretnénk használni, <span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">SET IMPLICIT_TRANSACTIONS ON parancsal segitségével tehetjük meg. Ebben az esetben nem BEGIN TRANSACTION-el kezdődik egy tranzakció, hanem amint egy tranzakció befejeződik, egy uj tranzakció kezdődik. Egy implicit tranzakció ugyanúgy commit vagy rollback paranccsal véglegesithető.</span></p>
 <section id="span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span">
 <h2><span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Feladat:</span><a class="headerlink" href="#span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span" title="Permalink to this heading">#</a></h2>
-<p><span style="background-color:rgb(255, 255, 255);">- Irjunk tárolt eljárást mely beszúr a SalesLT.SalesOrderDetail táblába és frissiti a Sales.SalesOrderHeader SubTotal mezőjét egy tranzakción belül.</span></p>
+<p><span style="background-color:rgb(255, 255, 255);">- Irjunk tárolt eljárást mely beszúr a SalesLT.SalesOrderDetail táblába és frissiti a Beszerzes tabla Osszeg mezőjét egy tranzakción belül.</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].</span><span class="n">spBeszurUjTermekEsFrissit</span>
+<span class="w">    </span><span class="o">@</span><span class="n">rendelesID</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">termekID</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">NOCOUNT</span><span class="w"> </span><span class="k">ON</span><span class="p">;</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">SalesOrderHeader</span><span class="p">]</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">rendelesID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;Nincs ilyen rendeles!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">RETURN</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Product</span><span class="p">]</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">termekID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;Nincs ilyen termek!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">RETURN</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">BEGIN</span>
+<span class="w">        </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;A mennyiseg nem lehet negativ!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">RETURN</span>
+<span class="w">    </span><span class="k">END</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">SERIALIZABLE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">BEGIN</span><span class="w"> </span><span class="n">TRY</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Beszerzes</span><span class="p">]</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">rendelesID</span><span class="p">)</span>
+<span class="w">        </span><span class="k">BEGIN</span>
+<span class="w">           </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span><span class="w"> </span><span class="p">(</span><span class="n">BeszerzesID</span><span class="p">,</span><span class="w"> </span><span class="n">Osszeg</span><span class="p">)</span><span class="w"> </span>
+<span class="w">           </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">rendelesID</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">           </span><span class="k">IF</span><span class="w"> </span><span class="o">@@</span><span class="n">ERROR</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">              </span><span class="k">BEGIN</span><span class="w"> </span>
+<span class="w">                </span><span class="n">RAISERROR</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hiba tortent a beszerzes beszurasa soran!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">              </span><span class="k">END</span>
+<span class="w">        </span><span class="k">END</span><span class="w">       </span>
+
+<span class="w">        </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">egysAr</span><span class="w"> </span><span class="n">money</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ListPrice</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">SalesLT</span><span class="p">].[</span><span class="n">Product</span><span class="p">]</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">termekID</span><span class="p">);</span>
+<span class="w">        </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="w">            </span><span class="p">(</span><span class="n">SalesOrderID</span><span class="p">,</span><span class="n">OrderQty</span><span class="p">,</span><span class="w"> </span><span class="n">ProductID</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPrice</span><span class="p">,</span><span class="w"> </span><span class="n">UnitPriceDiscount</span><span class="p">,</span><span class="w"> </span><span class="n">ModifiedDate</span><span class="p">)</span>
+<span class="w">        </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">rendelesID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">termekID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">egysAr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">@@</span><span class="n">ERROR</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"> </span>
+<span class="w">            </span><span class="n">RAISERROR</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hiba tortent a rendeles sor beszurasa soran!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">END</span>
+<span class="w">        </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">beszerzesID</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@@</span><span class="k">IDENTITY</span><span class="p">;</span>
+<span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span><span class="w"> </span>
+<span class="w">        </span><span class="k">SET</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Osszeg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">            </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">LineTotal</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderDetailID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">beszerzesID</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">rendelesID</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">@@</span><span class="n">ERROR</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"> </span>
+<span class="w">            </span><span class="n">RAISERROR</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hiba tortent az osszeg frissitese soran!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">END</span>
+<span class="w">        </span><span class="k">COMMIT</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">TRY</span>
+<span class="w">    </span><span class="k">BEGIN</span><span class="w"> </span><span class="n">CATCH</span>
+<span class="w">        </span><span class="k">SELECT</span>
+<span class="w">            </span><span class="n">ERROR_NUMBER</span><span class="p">()</span><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrNum</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ERROR_MESSAGE</span><span class="p">()</span><span class="w">  </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrMsg</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ERROR_STATE</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrState</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ERROR_SEVERITY</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrSeverity</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ERROR_LINE</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrLine</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ERROR_PROCEDURE</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrProcedure</span><span class="p">;</span>
+<span class="w">        </span><span class="k">ROLLBACK</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">CATCH</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.005</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DECLARE</span><span class="w"> </span>
+<span class="w">    </span><span class="o">@</span><span class="n">rendelesID</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">SalesOrderID</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderHeader</span><span class="p">),</span>
+<span class="w">    </span><span class="o">@</span><span class="n">termekID</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">ProductID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Product</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;HL Headset&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="o">@</span><span class="n">mennyiseg</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="o">@</span><span class="n">rendelesID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">termekID</span>
+<span class="k">EXECUTE</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">spBeszurUjTermekEsFrissit</span><span class="w"> </span><span class="o">@</span><span class="n">rendelesID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">termekID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">mennyiseg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.018</div><div class="output text_html"><table><tr><th>(No column name)</th><th>(No column name)</th></tr><tr><td>71946</td><td>807</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">SalesOrderDetail</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">SalesOrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">71946</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SalesLT</span><span class="p">.</span><span class="n">Beszerzes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">BeszerzesID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">71946</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(4 rows affected)</div><div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.014</div><div class="output text_html"><table><tr><th>SalesOrderID</th><th>SalesOrderDetailID</th><th>OrderQty</th><th>ProductID</th><th>UnitPrice</th><th>UnitPriceDiscount</th><th>LineTotal</th><th>rowguid</th><th>ModifiedDate</th></tr><tr><td>71946</td><td>113406</td><td>1</td><td>916</td><td>31.584</td><td>0.00</td><td>31.584000</td><td>b571cee0-a90a-4e76-9796-379b55352a28</td><td>2008-06-01 00:00:00.000</td></tr><tr><td>71946</td><td>114425</td><td>5</td><td>807</td><td>124.73</td><td>0.00</td><td>623.650000</td><td>1fc6b2ce-8cc4-433e-9f89-2de403d7e4e4</td><td>2023-12-15 17:02:31.197</td></tr><tr><td>71946</td><td>114426</td><td>5</td><td>807</td><td>124.73</td><td>0.00</td><td>623.650000</td><td>7732a87c-a7b5-4386-8406-b6cd8b55fb25</td><td>2023-12-15 17:04:01.300</td></tr><tr><td>71946</td><td>114427</td><td>5</td><td>807</td><td>124.73</td><td>0.00</td><td>623.650000</td><td>ce34e1cf-6ebb-4c02-90be-da4afa9fdf79</td><td>2023-12-15 17:09:58.367</td></tr></table></div><div class="output text_html"><table><tr><th>BeszerzesID</th><th>Osszeg</th></tr><tr><td>71946</td><td>1247.30</td></tr></table></div></div>
+</div>
 </section>
 </section>
 
