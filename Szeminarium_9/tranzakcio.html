@@ -382,6 +382,10 @@ document.write(`
                   
   <section id="tranzakciok">
 <h1>Tranzakciók<a class="headerlink" href="#tranzakciok" title="Permalink to this heading">#</a></h1>
+<p>A tranzakció egy munkaegység, melyet egyszerre kell végrehajtani.</p>
+<p>OLTP - Online Transaction Processing - olyan rendszerek melyek tranzakciók kezelésére lettek kialakítva.</p>
+<p>A tranzakciók egy vagy több műveletet tartalmaznak, melyeket egyszerre kell végrehajtani.</p>
+<p>Tranzakciók használata esetén a rendszer garantálja, hogy a tranzakcióban lévő műveletek vagy mind végrehajtódnak, vagy egyik sem.</p>
 <p>A tranzakciók használata elengedhetetlen az adatbázis konzisztenciájának megtartása érdekében!</p>
 <p><img alt="Diagram showing the difference between using transactions and not using transactions." src="https://docs.microsoft.com/en-gb/learn/wwl-data-ai/implement-transactions-transact-sql/media/transactions.png" /></p>
 <p>Minden esetben amikor a rendszer valamilyen műveletet végez azt tranzakció formájában teszi. Minden egyedi művelet maga egy tranzakció.</p>
@@ -417,12 +421,12 @@ document.write(`
 <p><span style="color: #0000ff;">ROLLBACK</span> <span style="color: #0000ff;">TRANSACTION</span>;</p>
 <p><span style="color: #0000ff;">END</span></p>
 <p><span style="color: #0000ff;">END</span> <span style="color: #0000ff;">CATCH</span>;</p>
-<p><a class="reference download internal" download="" href="../_downloads/30e42be22b8ed2d13c4d9bfd94c5911c/example.sql"><span class="xref download myst">Pelda file</span></a></p>
+<p><span class="xref myst">Pelda file</span></p>
 <p><strong>Implicit tranzakció</strong><span style="background-color:rgb(242, 242, 242);color:rgb(23, 23, 23);font-family:SFMono-Regular, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;white-space:pre;"><br></span></p>
 <p>Abban az esetben ha Implicit trantzakciókat szeretnénk használni, <span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">SET IMPLICIT_TRANSACTIONS ON parancsal segitségével tehetjük meg. Ebben az esetben nem BEGIN TRANSACTION-el kezdődik egy tranzakció, hanem amint egy tranzakció befejeződik, egy uj tranzakció kezdődik. Egy implicit tranzakció ugyanúgy commit vagy rollback paranccsal véglegesithető.</span></p>
 <section id="span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span">
 <h2><span style="background-color:rgb(255, 255, 255);color:rgb(51, 51, 51);font-family:&quot;Segoe UI&quot;, SegoeUI, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Feladat:</span><a class="headerlink" href="#span-style-background-color-rgb-255-255-255-color-rgb-51-51-51-font-family-quot-segoe-ui-quot-segoeui-quot-helvetica-neue-quot-helvetica-arial-sans-serif-feladat-span" title="Permalink to this heading">#</a></h2>
-<p><span style="background-color:rgb(255, 255, 255);">- Irjunk tárolt eljárást mely beszúr a SalesLT.SalesOrderDetail táblába és frissiti a Sales.SalesOrderHeader SubTotal mezőjét egy tranzakción belül.</p>
+<p><span style="background-color:rgb(255, 255, 255);">- Irjunk tárolt eljárást mely beszúr a SalesLT.SalesOrderDetail táblába és frissiti a Sales.SalesOrderHeader SubTotal mezőjét egy tranzakción belül.</span></p>
 </section>
 </section>
 
