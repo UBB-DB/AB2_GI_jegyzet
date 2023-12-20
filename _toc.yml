@@ -8,13 +8,16 @@
 # - file: notebooks
 # - file: markdown-notebooks
 
-format: jb-article
+# format: jb-article
+format: jb-book
 root: intro
+# file: intro
 title: README
-sections:
+# sections:
+chapters:
   # - file: markdown
   # title: Bevezető
-  # sections:
+
   - file: Szeminarium_1/gyakorlat
     title:
       "Szeminárium 1 - Ismétlés"
@@ -35,5 +38,16 @@ sections:
     title: "Szeminárium 8 - Kurzorok"
   - file: Szeminarium_9/tranzakcio
     title: "Szeminárium 9 - Tranzakciók"
+  - file: Szeminarium_10/index #/izolacioszintek
+    title: "Szeminárium 10 - Izolacios szintek"
+    sections:
+      - file: Szeminarium_10/izolacioszintek
+        title: "Izolációs szintek"
+      - file: Szeminarium_10/kesleltetes
+        title: "Műveletek késleltetése"
+      - file: Szeminarium_10/izolacios_szintek
+        title: "Peldak_1"
+      - file: Szeminarium_10/Izolacios_szintek_2
+        title: "Peldak_2"    
   - file: Utmutato/01_telepitesi_utmutato
     title: "Telepitesi utmutató"
