@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Konzisztenica problémák elkerülése(első rész) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Szeminarium_10/izolacios_szintek';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Konzisztenica problémák elkerülése(masodik rész)" href="Izolacios_szintek_2.html" />
+    <link rel="prev" title="Késleltetés" href="kesleltetes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    HALADO ADATBAZIS ELEMEK jegyzet
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_1/gyakorlat.html">Szeminárium 1 - Ismétlés</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_2/SetOperators_DML.html">Halmazműveletek</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_3/subqueries.html">Alkérdések</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_4/nezetek_taroltEljarasok.html">Delete utasitás</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek.html">Vátozók &amp; Vezérlő struktúrák</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_6/triggerek.html">Szeminárium 6 -  Triggerek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_8/kurzorok.html">Szeminárium 8 - Kurzorok</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Szeminarium_9/tranzakcio.html">Szeminárium 9 - Tranzakciók</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Szeminárium 10 - Izolacios szintek</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="izolacioszintek.html">Izolációs szintek</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="kesleltetes.html">Műveletek késleltetése</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Peldak_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Izolacios_szintek_2.html">Peldak_2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Utmutato/01_telepitesi_utmutato.html">Telepitesi utmutató</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UBB-DB/AB2_GI_jegyzet/issues/new?title=Issue%20on%20page%20%2FSzeminarium_10/izolacios_szintek.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Szeminarium_10/izolacios_szintek.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Konzisztenica problémák elkerülése(első rész)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="konzisztenica-problemak-elkerulese-elso-resz">
+<h1>Konzisztenica problémák elkerülése(első rész)<a class="headerlink" href="#konzisztenica-problemak-elkerulese-elso-resz" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Piszkos adat 2</span>
+<span class="c1">-- </span>
+<span class="c1">-- SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">READ</span><span class="w"> </span><span class="k">COMMITTED</span><span class="p">;</span>
+<span class="k">BEGIN</span><span class="w"> </span><span class="n">TRAN</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span><span class="w"> </span><span class="p">;</span>
+<span class="n">WAITFOR</span><span class="w"> </span><span class="n">DELAY</span><span class="w"> </span><span class="s1">&#39;00:00:07&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span><span class="w"> </span><span class="p">;</span>
+
+<span class="k">COMMIT</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(10 rows affected)</div><div class="output text_html">Total execution time: 00:00:12.029</div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr></table></div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>Jermaine.Massey@TechCorp.com</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr><tr><td>E11678</td><td>Colleen Alma</td><td>Colleen.Alma@TechCorp.com</td></tr><tr><td>E11920</td><td>Sharon Gillies</td><td>Sharon.Gillies@TechCorp.com</td></tr><tr><td>E12397</td><td>Daniel Matkovic</td><td>Daniel.Matkovic@TechCorp.com</td></tr><tr><td>E12562</td><td>Keith Ingram</td><td>Keith.Ingram@TechCorp.com</td></tr><tr><td>E12890</td><td>Robert Brown</td><td>Robert.Brown@TechCorp.com</td></tr><tr><td>E13085</td><td>Susan Cole </td><td>Susan.Cole @TechCorp.com</td></tr><tr><td>E13160</td><td>Eric  Baxter</td><td>Eric .Baxter@TechCorp.com</td></tr><tr><td>E13596</td><td>Kenneth Dewitt</td><td>Kenneth.Dewitt@TechCorp.com</td></tr></table></div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- T1.</span>
+<span class="c1">-- SET TRANSACTION ISOLATION LEVEL READ COMMITTED;</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">REPEATABLE</span><span class="w"> </span><span class="k">READ</span><span class="p">;</span>
+
+<span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span><span class="w"> </span><span class="p">;</span>
+<span class="n">WAITFOR</span><span class="w"> </span><span class="n">DELAY</span><span class="w"> </span><span class="s1">&#39;00:00:07&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span><span class="w"> </span><span class="p">;</span>
+
+<span class="k">ROLLBACK</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(10 rows affected)</div><div class="output text_html">(10 rows affected)</div><div class="output text_html">Total execution time: 00:00:07.014</div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>abc</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr><tr><td>E11678</td><td>Colleen Alma</td><td>Colleen.Alma@TechCorp.com</td></tr><tr><td>E11920</td><td>Sharon Gillies</td><td>Sharon.Gillies@TechCorp.com</td></tr><tr><td>E12397</td><td>Daniel Matkovic</td><td>Daniel.Matkovic@TechCorp.com</td></tr><tr><td>E12562</td><td>Keith Ingram</td><td>Keith.Ingram@TechCorp.com</td></tr><tr><td>E12890</td><td>Robert Brown</td><td>Robert.Brown@TechCorp.com</td></tr><tr><td>E13085</td><td>Susan Cole </td><td>Susan.Cole @TechCorp.com</td></tr><tr><td>E13160</td><td>Eric  Baxter</td><td>Eric .Baxter@TechCorp.com</td></tr><tr><td>E13596</td><td>Kenneth Dewitt</td><td>Kenneth.Dewitt@TechCorp.com</td></tr></table></div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>abc</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr><tr><td>E11678</td><td>Colleen Alma</td><td>Colleen.Alma@TechCorp.com</td></tr><tr><td>E11920</td><td>Sharon Gillies</td><td>Sharon.Gillies@TechCorp.com</td></tr><tr><td>E12397</td><td>Daniel Matkovic</td><td>Daniel.Matkovic@TechCorp.com</td></tr><tr><td>E12562</td><td>Keith Ingram</td><td>Keith.Ingram@TechCorp.com</td></tr><tr><td>E12890</td><td>Robert Brown</td><td>Robert.Brown@TechCorp.com</td></tr><tr><td>E13085</td><td>Susan Cole </td><td>Susan.Cole @TechCorp.com</td></tr><tr><td>E13160</td><td>Eric  Baxter</td><td>Eric .Baxter@TechCorp.com</td></tr><tr><td>E13596</td><td>Kenneth Dewitt</td><td>Kenneth.Dewitt@TechCorp.com</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- T1 </span>
+<span class="c1">-- SET TRANSACTION ISOLATION LEVEL REPEATABLE READ; </span>
+<span class="c1">--2.</span>
+<span class="c1">--  SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; </span>
+<span class="c1">--3.</span>
+<span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="n">SNAPSHOT</span><span class="p">;</span><span class="w"> </span>
+
+<span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;E10%&#39;</span><span class="p">;</span>
+<span class="n">WAITFOR</span><span class="w"> </span><span class="n">DELAY</span><span class="w"> </span><span class="s1">&#39;00:00:07&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;E10%&#39;</span><span class="p">;</span>
+<span class="k">ROLLBACK</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(4 rows affected)</div><div class="output text_html">(4 rows affected)</div><div class="output text_html">Total execution time: 00:00:07.006</div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>abc</td></tr><tr><td>E10202</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10203</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr></table></div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>abc</td></tr><tr><td>E10202</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10203</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="p">,</span><span class="w"> </span><span class="n">Nev</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Alkalmazottak</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">AlkalmazottID</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;E10%&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(5 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.007</div><div class="output text_html"><table><tr><th>AlkalmazottID</th><th>Nev</th><th>Email</th></tr><tr><td>E10033</td><td>Jermaine Massey</td><td>abc</td></tr><tr><td>E10202</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10203</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10204</td><td>Kiss János</td><td>janos.kiss@gmail.com</td></tr><tr><td>E10407</td><td>Darshan Rathod</td><td>Darshan.Rathod@TechCorp.com</td></tr></table></div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "SQL"
+        },
+        kernelOptions: {
+            name: "SQL",
+            path: "./Szeminarium_10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'SQL'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="kesleltetes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Késleltetés</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Izolacios_szintek_2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Konzisztenica problémák elkerülése(masodik rész)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
