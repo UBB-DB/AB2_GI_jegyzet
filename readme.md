@@ -2,7 +2,7 @@
 
 ### How to build the book
 
-Execure thefollowing command in the directory:
+Execure the following command in the directory:
 ```
 jupyter-book build . --all 
 ```
