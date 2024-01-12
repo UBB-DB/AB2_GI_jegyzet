@@ -48,6 +48,11 @@ chapters:
       - file: Szeminarium_10/izolacios_szintek
         title: "Peldak_1"
       - file: Szeminarium_10/Izolacios_szintek_2
-        title: "Peldak_2"    
+        title: "Peldak_2"  
+  - file: Szeminarium_11/adattarhazak
+    title: "Szeminárium 11 - Adattárházak"
+    sections:
+    - file: Szeminarium_11/adattarhaz
+      title: "Feladat"
   - file: Utmutato/01_telepitesi_utmutato
     title: "Telepitesi utmutató"
