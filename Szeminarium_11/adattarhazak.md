@@ -11,18 +11,23 @@ Hasonloság a tranzakcionális adatbázisokhoz:
 Különbségek:  
 - Központosított: egy cég összes adatát tartalmazza
 - Historizált : tartalmazza nem csak az aktuális adatokat hanem az időbeli módosításokat is 
-- Olvasásra optimizált: komplex és nagy méretu adatokra (OLTP - írásra-modositasra optimizalt)  
+- Olvasásra optimizált: komplex és nagy méretu adatokra, OLAP (OLTP - írásra-modositasra optimizalt)  
 
 
 ## Adattárházak építése 
 Több féle metodologia létezik:
-- Kimball (Ralph)
+- Kimball (Ralph) - Dimensional model/Star schema
 - Inmon (Bill)
 - Data vault (Dan Linstedt)
 
-Ezeknek alkalmazása függ az adatok mennyiségétől és milyenségétől valamint a felhasznált rendszerektől
+Ezeknek alkalmazása függ az adatok mennyiségétől és milyenségétől valamint a felhasznált rendszerektől. 
 
+### Modellezes
+![Star schema](image-1.png)
 
+![Data vault](image.png)
+
+![3NF Inmon](image-2.png)
 
 
 
