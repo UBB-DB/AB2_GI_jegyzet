@@ -28,7 +28,7 @@ chapters:
     title: "Szeminárium 2 - Halmazműveletek, DML"
   - file: Szeminarium_3/subqueries
     title: "Szeminárium 3 -  Alkérdések"
-  - file: Szeminarium_4/nezetek_taroltEljarasok
+  - file: Szeminarium_4/nezetek_taroltEljarasok 
     title: "Szeminárium 4 - Delete, Nezetek, Tarolt eljárások(bevezető)"
   - file: Szeminarium_5/taroltEljarasokHibakezeles_Fuggvenyek
     title: "Szeminárium 5 -  Tarolt eljárások, Fuggvenyek"
@@ -54,5 +54,12 @@ chapters:
     sections:
     - file: Szeminarium_11/adattarhaz
       title: "Feladat"
+  - file: Szeminarium_12/ismetles
+    title: "Szeminárium 12 - Ismetles"
+    # - file: Szeminarium_12/Mozi ## TODO hogyan lehet linkelni allomanyokat a book-hoz?
   - file: Utmutato/01_telepitesi_utmutato
-    title: "Telepitesi utmutató"
+    title: "Telepitesi utmutató" 
+    sections:
+    - file: Szeminarium_12/Mozi.sql
+      title: "Mozi script"
+      
