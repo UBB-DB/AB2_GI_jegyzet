@@ -481,6 +481,148 @@ document.write(`
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">  Ellenorzi a beszuras sikeressseget az &#64;&#64;ERROR valtozo ertekevel - hiba eseten visszavonja a tranzakciot (Hasznalhatjuk a RAISERROR vagy TRY/CATCH-THROW parancsot is ) siker eseten noveli a VetitesekSzama parametert</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Sikeres futas eseten COMMIT parancsot hasznalunk</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">spVETITESFELVEZETESE</span>
+<span class="o">@</span><span class="n">DATUM</span><span class="w"> </span><span class="n">DATETIME</span><span class="p">,</span>
+<span class="o">@</span><span class="n">VETITESEKSZAMA</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">NOCOUNT</span><span class="w"> </span><span class="k">ON</span><span class="p">;</span>
+<span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">SERIALIZABLE</span>
+<span class="w">    </span><span class="k">BEGIN</span><span class="w"> </span><span class="n">TRAN</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"> </span><span class="n">TRY</span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">VETITESEKSZAMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">DATUM</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">()</span>
+<span class="w">                </span><span class="k">BEGIN</span>
+<span class="w">                    </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;A vetites nem lehet korabbi, mint a mai nap!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">RETURN</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">                </span><span class="k">END</span>
+<span class="w">            </span>
+<span class="w">                </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fIlmID</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="o">@</span><span class="n">AR</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="o">@</span><span class="n">TEREM</span><span class="w"> </span><span class="nb">INT</span>
+<span class="w">                                            </span>
+<span class="w"> </span>
+<span class="w">                </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">AR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">TEREM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">VETITESEKSZAMA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- TODO: TEREM ID </span>
+<span class="w">                </span><span class="k">DECLARE</span><span class="w"> </span><span class="n">fIlmIDCursor</span><span class="w"> </span><span class="k">CURSOR</span><span class="w"> </span><span class="k">FOR</span>
+<span class="w">                </span><span class="k">SELECT</span><span class="w"> </span><span class="n">FilmID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Filmek</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">AKTIV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="k">OPEN</span><span class="w"> </span><span class="n">fIlmIDCursor</span>
+<span class="w">                </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">fIlmIDCursor</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">fIlmID</span>
+<span class="w">                </span><span class="n">WHILE</span><span class="w"> </span><span class="o">@@</span><span class="n">FETCH_STATUS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                    </span><span class="k">BEGIN</span>
+<span class="w">                        </span><span class="c1">-- SELECT FILMCIM FROM FILMEK WHERE FilmID = @fIlmID</span>
+<span class="w">                        </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Vetites</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">FilmID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">fIlmID</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">VetitesIdopontja</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">DATUM</span><span class="p">)</span>
+<span class="w">                            </span><span class="k">BEGIN</span><span class="w">  </span>
+<span class="w">                                </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">AR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CASE</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">40</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">                                                    </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">                                                    </span><span class="k">END</span><span class="p">,</span>
+<span class="w">                                                </span>
+<span class="w">                                        </span><span class="o">@</span><span class="n">TEREM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">                                        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hossz</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                                        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hossz</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">                                        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hossz</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">120</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">                                        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hossz</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">                                        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hossz</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">                                        </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">6</span>
+<span class="w">                                        </span><span class="k">END</span>
+<span class="w">                                    </span><span class="k">FROM</span><span class="w"> </span><span class="n">Filmek</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">FilmID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">fIlmID</span>
+<span class="w">                                    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Vetites</span><span class="p">(</span><span class="n">FilmID</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="n">VetitesIdopontja</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="n">Terem</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="n">Ar</span><span class="p">)</span><span class="w"> </span>
+<span class="w">                                </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">fIlmID</span><span class="p">,</span>
+<span class="w">                                 </span><span class="o">@</span><span class="n">DATUM</span><span class="p">,</span>
+<span class="w">                                </span><span class="o">@</span><span class="n">TEREM</span><span class="p">,</span>
+<span class="w">                                </span><span class="o">@</span><span class="n">AR</span><span class="p">)</span>
+<span class="w">                                </span><span class="k">IF</span><span class="w"> </span><span class="o">@@</span><span class="n">ERROR</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                                    </span><span class="k">BEGIN</span>
+<span class="w">                                        </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;Hiba tortent a vetites felvetele soran!&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                                        </span><span class="k">RETURN</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">                                    </span><span class="k">END</span>
+<span class="w">                                </span><span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">VETITESEKSZAMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">VETITESEKSZAMA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">                                </span>
+<span class="w">                            </span><span class="k">END</span>
+<span class="w">                        </span><span class="k">FETCH</span><span class="w"> </span><span class="k">NEXT</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">fIlmIDCursor</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="o">@</span><span class="n">fIlmID</span>
+<span class="w">                    </span><span class="k">END</span>
+<span class="w">                </span><span class="k">CLOSE</span><span class="w"> </span><span class="n">fIlmIDCursor</span>
+<span class="w">                </span><span class="k">DEALLOCATE</span><span class="w"> </span><span class="n">fIlmIDCursor</span>
+
+<span class="w">           </span>
+<span class="w">                </span><span class="k">COMMIT</span><span class="w"> </span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="n">TRY</span>
+<span class="w">        </span><span class="k">BEGIN</span><span class="w"> </span><span class="n">CATCH</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">ERROR_MESSAGE</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrorMessage</span><span class="p">,</span>
+<span class="w">         </span><span class="n">ERROR_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrorNumber</span><span class="p">,</span>
+<span class="w">         </span><span class="n">ERROR_SEVERITY</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrorSeverity</span><span class="p">,</span>
+<span class="w">         </span><span class="n">ERROR_STATE</span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ErrorState</span>
+
+<span class="w">            </span><span class="k">ROLLBACK</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="n">CATCH</span>
+<span class="k">END</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Commands completed successfully.</div><div class="output text_html">Total execution time: 00:00:00.003</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">AR</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="o">@</span><span class="n">TEREM</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">AR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CASE</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">40</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Csillag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">                                                    </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">                                                    </span><span class="k">END</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="o">@</span><span class="n">TEREM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CASE</span>
+<span class="w">                                                    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">Hossz</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                                                    </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">                                                    </span><span class="k">END</span>
+<span class="w">                                    </span><span class="k">FROM</span><span class="w"> </span><span class="n">Filmek</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">FilmID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">AR</span><span class="p">,</span><span class="o">@</span><span class="n">TEREM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">Total execution time: 00:00:00.008</div><div class="output text_html"><table><tr><th>(No column name)</th><th>(No column name)</th></tr><tr><td>50</td><td>1</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Filmek</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Aktiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(3 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.011</div><div class="output text_html"><table><tr><th>FilmID</th><th>FilmCim</th><th>StudioID</th><th>MufajID</th><th>Csillag</th><th>MegjEv</th><th>Hossz</th><th>Aktiv</th></tr><tr><td>1</td><td>Les Miserables</td><td>1</td><td>2</td><td>5</td><td>2012</td><td>158</td><td>1</td></tr><tr><td>6</td><td>Ticket to paradise</td><td>5</td><td>4</td><td>3</td><td>2022</td><td>104</td><td>1</td></tr><tr><td>7</td><td>No time to die</td><td>5</td><td>3</td><td>5</td><td>2021</td><td>163</td><td>1</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">OUT</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="o">@</span><span class="k">RETURN</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span>
+<span class="k">EXEC</span><span class="w"> </span><span class="o">@</span><span class="k">RETURN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spVETITESFELVEZETESE</span><span class="w"> </span><span class="s1">&#39;2024-12-13 18:00:00.000&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">out</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">RETURN</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ReturnValue</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">OUT</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s1">&#39;Out&#39;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Vetites</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(1 row affected)</div><div class="output text_html">(16 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.013</div><div class="output text_html"><table><tr><th>ReturnValue</th><th>Out</th></tr><tr><td>0</td><td>3</td></tr></table></div><div class="output text_html"><table><tr><th>VetitesID</th><th>FilmID</th><th>VetitesIdopontja</th><th>Terem</th><th>Ar</th></tr><tr><td>1</td><td>1</td><td>2012-12-12 18:00:00.000</td><td>3</td><td>10.00</td></tr><tr><td>2</td><td>1</td><td>2018-12-12 18:00:00.000</td><td>6</td><td>15.00</td></tr><tr><td>3</td><td>1</td><td>2019-12-12 18:00:00.000</td><td>7</td><td>18.00</td></tr><tr><td>4</td><td>1</td><td>2019-11-12 16:30:00.000</td><td>3</td><td>14.00</td></tr><tr><td>5</td><td>2</td><td>2019-11-12 18:00:00.000</td><td>1</td><td>15.00</td></tr><tr><td>6</td><td>4</td><td>2019-11-12 22:15:00.000</td><td>4</td><td>16.00</td></tr><tr><td>7</td><td>6</td><td>2022-09-16 18:00:00.000</td><td>2</td><td>21.00</td></tr><tr><td>8</td><td>6</td><td>2022-09-16 22:00:00.000</td><td>2</td><td>24.00</td></tr><tr><td>9</td><td>6</td><td>2022-09-22 20:00:00.000</td><td>5</td><td>25.00</td></tr><tr><td>10</td><td>6</td><td>2022-09-22 22:00:00.000</td><td>2</td><td>25.00</td></tr><tr><td>11</td><td>1</td><td>2024-12-12 18:00:00.000</td><td>1</td><td>1.00</td></tr><tr><td>12</td><td>6</td><td>2024-12-12 18:00:00.000</td><td>1</td><td>1.00</td></tr><tr><td>13</td><td>7</td><td>2024-12-12 18:00:00.000</td><td>1</td><td>1.00</td></tr><tr><td>14</td><td>1</td><td>2024-12-13 18:00:00.000</td><td>5</td><td>50.00</td></tr><tr><td>15</td><td>6</td><td>2024-12-13 18:00:00.000</td><td>3</td><td>30.00</td></tr><tr><td>16</td><td>7</td><td>2024-12-13 18:00:00.000</td><td>5</td><td>50.00</td></tr></table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Vetites</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">(10 rows affected)</div><div class="output text_html">Total execution time: 00:00:00.024</div><div class="output text_html"><table><tr><th>VetitesID</th><th>FilmID</th><th>VetitesIdopontja</th><th>Terem</th><th>Ar</th></tr><tr><td>1</td><td>1</td><td>2012-12-12 18:00:00.000</td><td>3</td><td>10.00</td></tr><tr><td>2</td><td>1</td><td>2018-12-12 18:00:00.000</td><td>6</td><td>15.00</td></tr><tr><td>3</td><td>1</td><td>2019-12-12 18:00:00.000</td><td>7</td><td>18.00</td></tr><tr><td>4</td><td>1</td><td>2019-11-12 16:30:00.000</td><td>3</td><td>14.00</td></tr><tr><td>5</td><td>2</td><td>2019-11-12 18:00:00.000</td><td>1</td><td>15.00</td></tr><tr><td>6</td><td>4</td><td>2019-11-12 22:15:00.000</td><td>4</td><td>16.00</td></tr><tr><td>7</td><td>6</td><td>2022-09-16 18:00:00.000</td><td>2</td><td>21.00</td></tr><tr><td>8</td><td>6</td><td>2022-09-16 22:00:00.000</td><td>2</td><td>24.00</td></tr><tr><td>9</td><td>6</td><td>2022-09-22 20:00:00.000</td><td>5</td><td>25.00</td></tr><tr><td>10</td><td>6</td><td>2022-09-22 22:00:00.000</td><td>2</td><td>25.00</td></tr></table></div></div>
+</div>
 </section>
 </section>
 
