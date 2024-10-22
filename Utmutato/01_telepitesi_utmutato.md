@@ -43,10 +43,16 @@ https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-co
 
  ### Windowsra:
 
- a szerver telepités befejeztével felajánlja az SSMS(SQL server management studio) telepitését amire szükség lesz. Ha véletlen kimarad a telepitőt itt találjátok: https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16 A telepítő fel fog telepíteni egy Azure Data Studio névű eszközt is(ez VS Code alapú fejlesztői környezet), opcionálisan ez is használható mint kliens.
+ a szerver telepités befejeztével felajánlja az SSMS(SQL server management studio) telepitését amire szükség lesz. Ha véletlen kimarad a telepitőt itt találjátok: https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms A telepítő fel fog telepíteni egy Azure Data Studio névű eszközt is(ez VS Code alapú fejlesztői környezet), opcionálisan ez is használható mint kliens.
 
-Linux es Mac: alatt csak az Azure Data Studio kliens telepíthető mivel ez platform független. Ezt itt találjatok: https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16 
-
+Linux es Mac: alatt csak az Azure Data Studio kliens telepíthető mivel ez platform független. Ezt itt találjatok: https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio
  
 
 Sikeres tanévet!
+
+## Gyakori problémák
+
+### SSL tanúsítvány(certificate) probléma csatlakozáskor
+Ha nem sikerül csatlakozni a szerverre a "Trust server certicicate" opció bekapcsolasaval sem, itt található további információ  [link](https://learn.microsoft.com/en-us/troubleshoot/sql/database-engine/connect/error-message-when-you-connect)
+
+
