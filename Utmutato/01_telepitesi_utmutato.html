@@ -393,6 +393,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowsra">Windowsra:</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gyakori-problemak">Gyakori problémák</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssl-tanusitvany-certificate-problema-csatlakozaskor">SSL tanúsítvány(certificate) probléma csatlakozáskor</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -444,9 +448,16 @@ document.write(`
 <h2>Kliens telepitése<a class="headerlink" href="#kliens-telepitese" title="Permalink to this heading">#</a></h2>
 <section id="windowsra">
 <h3>Windowsra:<a class="headerlink" href="#windowsra" title="Permalink to this heading">#</a></h3>
-<p>a szerver telepités befejeztével felajánlja az SSMS(SQL server management studio) telepitését amire szükség lesz. Ha véletlen kimarad a telepitőt itt találjátok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16">https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16</a> A telepítő fel fog telepíteni egy Azure Data Studio névű eszközt is(ez VS Code alapú fejlesztői környezet), opcionálisan ez is használható mint kliens.</p>
-<p>Linux es Mac: alatt csak az Azure Data Studio kliens telepíthető mivel ez platform független. Ezt itt találjatok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16">https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver16</a></p>
+<p>a szerver telepités befejeztével felajánlja az SSMS(SQL server management studio) telepitését amire szükség lesz. Ha véletlen kimarad a telepitőt itt találjátok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms">https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms</a> A telepítő fel fog telepíteni egy Azure Data Studio névű eszközt is(ez VS Code alapú fejlesztői környezet), opcionálisan ez is használható mint kliens.</p>
+<p>Linux es Mac: alatt csak az Azure Data Studio kliens telepíthető mivel ez platform független. Ezt itt találjatok: <a class="reference external" href="https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio">https://learn.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio</a></p>
 <p>Sikeres tanévet!</p>
+</section>
+</section>
+<section id="gyakori-problemak">
+<h2>Gyakori problémák<a class="headerlink" href="#gyakori-problemak" title="Permalink to this heading">#</a></h2>
+<section id="ssl-tanusitvany-certificate-problema-csatlakozaskor">
+<h3>SSL tanúsítvány(certificate) probléma csatlakozáskor<a class="headerlink" href="#ssl-tanusitvany-certificate-problema-csatlakozaskor" title="Permalink to this heading">#</a></h3>
+<p>Ha nem sikerül csatlakozni a szerverre a “Trust server certicicate” opció bekapcsolasaval sem, itt található további információ  <a class="reference external" href="https://learn.microsoft.com/en-us/troubleshoot/sql/database-engine/connect/error-message-when-you-connect">link</a></p>
 </section>
 </section>
 <div class="toctree-wrapper compound">
@@ -520,6 +531,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kliens-telepitese">Kliens telepitése</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windowsra">Windowsra:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gyakori-problemak">Gyakori problémák</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ssl-tanusitvany-certificate-problema-csatlakozaskor">SSL tanúsítvány(certificate) probléma csatlakozáskor</a></li>
 </ul>
 </li>
 </ul>
